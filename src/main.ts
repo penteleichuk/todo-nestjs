@@ -19,6 +19,7 @@ async function bootstrap() {
 		.addTag('todo')
 		.build()
 	const document = SwaggerModule.createDocument(app, config)
+
 	SwaggerModule.setup('api', app, document)
 
 	if (configService.get('NODE_ENV') === 'development') {
