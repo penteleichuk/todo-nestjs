@@ -25,7 +25,7 @@ async function bootstrap() {
 	if (configService.get('NODE_ENV') === 'development') {
 		await app.listen(4221)
 	} else {
-		await app.listen(process.env.PORT || 3000)
+		await app.listen(process.env.PORT || 80, '0.0.0.0')
 	}
 }
 
