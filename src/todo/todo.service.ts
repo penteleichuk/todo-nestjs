@@ -8,6 +8,7 @@ import { Types } from 'mongoose'
 import { InjectModel } from 'nestjs-typegoose'
 import { CreateTodoDto } from './dto/create-todo.dto'
 import { DeleteTodoDto } from './dto/delete-todo.dto'
+import { GetByIdTodoDto } from './dto/get-byid-todo.dto'
 import { SwapOrderTodoDto } from './dto/swap-order-todo.dto'
 import { UpdateTodoDto } from './dto/update-todo.dto'
 import { TodoModel } from './todo.model'
@@ -33,6 +34,20 @@ export class TodoService {
 
 		const { author, ...res } = (await newTodo.save()).toJSON()
 		return res
+	}
+
+	async getById(dto: GetByIdTodoDto) {
+		const todo = await this.todoModel
+			.findOne({ author: dto.author, _jd: dto.todoId }, '-author')
+			.sort({ order: 1, createdAt: -1 })
+			.populate({
+				path: 'tasks',
+				select: '-author',
+				options: { sort: { order: 1 } },
+			})
+			.exec()
+
+		return todo
 	}
 
 	async getAll(_id: Types.ObjectId) {

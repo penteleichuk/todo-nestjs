@@ -1,10 +1,19 @@
-import { Body, Controller, Delete, Get, Patch, Post } from '@nestjs/common'
+import {
+	Body,
+	Controller,
+	Delete,
+	Get,
+	Param,
+	Patch,
+	Post,
+} from '@nestjs/common'
 import { ApiBody, ApiCreatedResponse, ApiTags } from '@nestjs/swagger'
 import { Types } from 'mongoose'
 import { Auth } from './../auth/decorators/auth.decorator'
 import { User } from './../user/decorators/user.decorator'
 import { CreateTodoDto } from './dto/create-todo.dto'
 import { DeleteTodoDto } from './dto/delete-todo.dto'
+import { GetByIdTodoDto } from './dto/get-byid-todo.dto'
 import { SwapOrderTodoDto } from './dto/swap-order-todo.dto'
 import { UpdateTodoDto } from './dto/update-todo.dto'
 import { TodoModel } from './todo.model'
@@ -38,6 +47,19 @@ export class TodoController {
 	})
 	async getAll(@User('_id') _id: Types.ObjectId) {
 		return this.todoService.getAll(_id)
+	}
+
+	@Auth()
+	@Get(':id')
+	@ApiCreatedResponse({
+		description: 'Get todo by id object as response.',
+		type: TodoModel,
+	})
+	async getById(
+		@User('_id') author: Types.ObjectId,
+		@Param('id') dto: GetByIdTodoDto
+	) {
+		return this.todoService.getById({ ...dto, author })
 	}
 
 	@Auth()
