@@ -11,8 +11,8 @@ export class TaskModel extends TimeStamps {
 	@prop({ required: true })
 	name: string
 
-	@prop({ required: true, default: StatusType.IN_PROGRESS })
-	stauts: StatusType
+	@prop({ required: true, enum: StatusType, default: StatusType.IN_PROGRESS })
+	status: StatusType
 
 	@prop({ required: true, ref: () => UserModel })
 	author: Ref<UserModel>

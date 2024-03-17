@@ -11,6 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskService = void 0;
 const common_1 = require("@nestjs/common");
@@ -44,12 +55,19 @@ let TaskService = class TaskService {
         return response;
     }
     async update(dto) {
+        const { author, taskId: _id } = dto, rest = __rest(dto, ["author", "taskId"]);
         const response = await this.taskModel
-            .findOneAndUpdate({
-            author: dto.author,
-            _id: dto.taskId,
-        }, { name: dto.name, status: dto.status }, { new: true })
-            .populate([{ path: 'author', select: '_id name isAdmin isBanned' }]);
+            .findOneAndUpdate({ author, _id }, Object.assign({}, rest), { new: true })
+            .populate([
+            {
+                path: 'todo',
+                select: 'name',
+            },
+            {
+                path: 'author',
+                select: 'name',
+            },
+        ]);
         if (!response) {
             throw new common_1.NotFoundException(`Task not found`);
         }

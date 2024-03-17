@@ -58,7 +58,7 @@ __decorate([
 ], TaskController.prototype, "delete", null);
 __decorate([
     (0, auth_decorator_1.Auth)(),
-    (0, common_1.Patch)(),
+    (0, common_1.Put)(),
     (0, swagger_1.ApiBody)({ type: update_task_dto_1.UpdateTaskDto }),
     (0, swagger_1.ApiResponse)({
         status: 200,

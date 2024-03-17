@@ -22,9 +22,9 @@ __decorate([
     __metadata("design:type", String)
 ], TaskModel.prototype, "name", void 0);
 __decorate([
-    (0, typegoose_1.prop)({ required: true, default: task_status_1.StatusType.IN_PROGRESS }),
+    (0, typegoose_1.prop)({ required: true, enum: task_status_1.StatusType, default: task_status_1.StatusType.IN_PROGRESS }),
     __metadata("design:type", String)
-], TaskModel.prototype, "stauts", void 0);
+], TaskModel.prototype, "status", void 0);
 __decorate([
     (0, typegoose_1.prop)({ required: true, ref: () => user_model_1.UserModel }),
     __metadata("design:type", Object)

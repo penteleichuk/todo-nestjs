@@ -7,7 +7,7 @@ export interface TaskModel extends Base {
 }
 export declare class TaskModel extends TimeStamps {
     name: string;
-    stauts: StatusType;
+    status: StatusType;
     author: Ref<UserModel>;
     todo: Ref<TodoModel>;
 }

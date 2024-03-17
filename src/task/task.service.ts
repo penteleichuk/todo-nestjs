@@ -44,16 +44,20 @@ export class TaskService {
 	}
 
 	async update(dto: UpdateTaskDto) {
+		const { author, taskId: _id, ...rest } = dto
+
 		const response = await this.taskModel
-			.findOneAndUpdate(
+			.findOneAndUpdate({ author, _id }, { ...rest }, { new: true })
+			.populate([
 				{
-					author: dto.author,
-					_id: dto.taskId,
+					path: 'todo',
+					select: 'name',
 				},
-				{ name: dto.name, status: dto.status },
-				{ new: true }
-			)
-			.populate([{ path: 'author', select: '_id name isAdmin isBanned' }])
+				{
+					path: 'author',
+					select: 'name',
+				},
+			])
 
 		if (!response) {
 			throw new NotFoundException(`Task not found`)

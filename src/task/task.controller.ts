@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Patch, Post } from '@nestjs/common'
+import { Body, Controller, Delete, Post, Put } from '@nestjs/common'
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { Types } from 'mongoose'
 import { Auth } from './../auth/decorators/auth.decorator'
@@ -34,7 +34,7 @@ export class TaskController {
 	}
 
 	@Auth()
-	@Patch()
+	@Put()
 	@ApiBody({ type: UpdateTaskDto })
 	@ApiResponse({
 		status: 200,
