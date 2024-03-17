@@ -2,12 +2,12 @@ import { ApiProperty } from '@nestjs/swagger'
 import { IsMongoId, IsNotEmpty, IsString, MaxLength } from 'class-validator'
 import { Types } from 'mongoose'
 
-export class CreateCategoryDto {
+export class CreateTodoDto {
 	@IsNotEmpty()
 	@IsString()
 	@MaxLength(120)
 	@ApiProperty({
-		description: 'The name of the category',
+		description: 'The name of the todo',
 		maxLength: 120,
 		example: 'Technology',
 	})

@@ -17,13 +17,13 @@ const common_1 = require("@nestjs/common");
 const nestjs_typegoose_1 = require("nestjs-typegoose");
 const task_model_1 = require("./task.model");
 let TaskService = class TaskService {
-    constructor(messageModel) {
-        this.messageModel = messageModel;
+    constructor(taskModel) {
+        this.taskModel = taskModel;
     }
     async create(dto) {
-        const category = await new this.messageModel(Object.assign(Object.assign({}, dto), { category: dto.categoryId })).populate([
+        const task = await new this.taskModel(Object.assign(Object.assign({}, dto), { todo: dto.todoId })).populate([
             {
-                path: 'category',
+                path: 'todo',
                 select: 'name',
             },
             {
@@ -31,10 +31,10 @@ let TaskService = class TaskService {
                 select: 'name',
             },
         ]);
-        return category.save();
+        return task.save();
     }
     async delete(dto) {
-        const response = await this.messageModel.findOneAndDelete({
+        const response = await this.taskModel.findOneAndDelete({
             author: dto.author,
             _id: dto.taskId,
         });
@@ -44,7 +44,7 @@ let TaskService = class TaskService {
         return response;
     }
     async update(dto) {
-        const response = await this.messageModel
+        const response = await this.taskModel
             .findOneAndUpdate({
             author: dto.author,
             _id: dto.taskId,

@@ -16,8 +16,8 @@ exports.TaskController = void 0;
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const mongoose_1 = require("mongoose");
-const auth_decorator_1 = require("../auth/decorators/auth.decorator");
-const user_decorator_1 = require("../user/decorators/user.decorator");
+const auth_decorator_1 = require("./../auth/decorators/auth.decorator");
+const user_decorator_1 = require("./../user/decorators/user.decorator");
 const create_task_dto_1 = require("./dto/create-task.dto");
 const delete_task_dto_1 = require("./dto/delete-task.dto");
 const update_task_dto_1 = require("./dto/update-task.dto");
@@ -62,7 +62,7 @@ __decorate([
     (0, swagger_1.ApiBody)({ type: update_task_dto_1.UpdateTaskDto }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'Update category user',
+        description: 'Update todo user',
         type: (Promise),
     }),
     __param(0, (0, user_decorator_1.User)('_id')),

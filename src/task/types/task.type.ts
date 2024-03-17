@@ -1,10 +1,10 @@
-import { UserType } from 'src/user/types/user.type'
-import { CategoryType } from './../../category/types/category.type'
 import { StatusType } from './../../shared/consts/task-status'
+import { TodoType } from './../../todo/types/todo.type'
+import { UserType } from './../../user/types/user.type'
 
 export interface TaskType {
 	name: string
 	stauts: StatusType
 	author: UserType
-	category?: CategoryType
+	todo?: TodoType
 }

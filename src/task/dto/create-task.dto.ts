@@ -22,18 +22,18 @@ export class CreateTaskDto {
 	name: string
 
 	@IsNotEmpty()
-	@IsMongoId({ message: 'Category_id must be a valid MongoDB ObjectId' })
+	@IsMongoId({ message: 'todo_id must be a valid MongoDB ObjectId' })
 	@ApiProperty({
-		description: 'The MongoDB ObjectId of the category this task belongs to',
+		description: 'The MongoDB ObjectId of the todo this task belongs to',
 		example: '507f191e810c19729de860ea',
 		type: 'string',
 	})
-	categoryId: Types.ObjectId
+	todoId: Types.ObjectId
 
 	@IsEnum(StatusType)
 	@IsOptional()
 	@ApiPropertyOptional({
-		description: 'The status of the category',
+		description: 'The status of the todo',
 		enum: StatusType,
 		example: StatusType.IN_PROGRESS,
 	})

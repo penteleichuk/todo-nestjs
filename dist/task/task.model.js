@@ -12,9 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskModel = void 0;
 const typegoose_1 = require("@typegoose/typegoose");
 const defaultClasses_1 = require("@typegoose/typegoose/lib/defaultClasses");
-const user_model_1 = require("../user/user.model");
 const task_status_1 = require("./..//shared/consts/task-status");
-const category_model_1 = require("./../category/category.model");
+const todo_model_1 = require("./../todo/todo.model");
+const user_model_1 = require("./../user/user.model");
 let TaskModel = class TaskModel extends defaultClasses_1.TimeStamps {
 };
 __decorate([
@@ -30,9 +30,9 @@ __decorate([
     __metadata("design:type", Object)
 ], TaskModel.prototype, "author", void 0);
 __decorate([
-    (0, typegoose_1.prop)({ required: true, ref: () => category_model_1.СategoryModel }),
+    (0, typegoose_1.prop)({ required: true, ref: () => todo_model_1.TodoModel }),
     __metadata("design:type", Object)
-], TaskModel.prototype, "category", void 0);
+], TaskModel.prototype, "todo", void 0);
 TaskModel = __decorate([
     (0, typegoose_1.modelOptions)({ schemaOptions: { versionKey: false } })
 ], TaskModel);

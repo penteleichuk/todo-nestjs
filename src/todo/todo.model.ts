@@ -3,7 +3,7 @@ import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses'
 import { TaskModel } from './../task/task.model'
 import { UserModel } from './../user/user.model'
 
-export interface СategoryModel extends Base {}
+export interface TodoModel extends Base {}
 
 @modelOptions({
 	schemaOptions: {
@@ -12,13 +12,13 @@ export interface СategoryModel extends Base {}
 		toJSON: { virtuals: true },
 	},
 })
-export class СategoryModel extends TimeStamps {
+export class TodoModel extends TimeStamps {
 	@prop({ required: true })
 	name: string
 
 	@prop({
 		ref: () => TaskModel,
-		foreignField: 'category',
+		foreignField: 'todo',
 		localField: '_id',
 		justOne: false,
 	})

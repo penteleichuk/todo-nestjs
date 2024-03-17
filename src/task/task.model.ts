@@ -1,8 +1,8 @@
 import { modelOptions, prop, Ref } from '@typegoose/typegoose'
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses'
-import { UserModel } from 'src/user/user.model'
 import { StatusType } from './..//shared/consts/task-status'
-import { СategoryModel } from './../category/category.model'
+import { TodoModel } from './../todo/todo.model'
+import { UserModel } from './../user/user.model'
 
 export interface TaskModel extends Base {}
 
@@ -17,6 +17,6 @@ export class TaskModel extends TimeStamps {
 	@prop({ required: true, ref: () => UserModel })
 	author: Ref<UserModel>
 
-	@prop({ required: true, ref: () => СategoryModel })
-	category: Ref<СategoryModel>
+	@prop({ required: true, ref: () => TodoModel })
+	todo: Ref<TodoModel>
 }

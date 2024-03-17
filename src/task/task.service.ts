@@ -9,16 +9,16 @@ import { TaskModel } from './task.model'
 @Injectable()
 export class TaskService {
 	constructor(
-		@InjectModel(TaskModel) private readonly messageModel: ModelType<TaskModel>
+		@InjectModel(TaskModel) private readonly taskModel: ModelType<TaskModel>
 	) {}
 
 	async create(dto: CreateTaskDto) {
-		const category = await new this.messageModel({
+		const task = await new this.taskModel({
 			...dto,
-			category: dto.categoryId,
+			todo: dto.todoId,
 		}).populate([
 			{
-				path: 'category',
+				path: 'todo',
 				select: 'name',
 			},
 			{
@@ -27,11 +27,11 @@ export class TaskService {
 			},
 		])
 
-		return category.save()
+		return task.save()
 	}
 
 	async delete(dto: DeleteTaskDto) {
-		const response = await this.messageModel.findOneAndDelete({
+		const response = await this.taskModel.findOneAndDelete({
 			author: dto.author,
 			_id: dto.taskId,
 		})
@@ -44,7 +44,7 @@ export class TaskService {
 	}
 
 	async update(dto: UpdateTaskDto) {
-		const response = await this.messageModel
+		const response = await this.taskModel
 			.findOneAndUpdate(
 				{
 					author: dto.author,

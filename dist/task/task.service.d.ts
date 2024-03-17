@@ -29,8 +29,8 @@ import { DeleteTaskDto } from './dto/delete-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { TaskModel } from './task.model';
 export declare class TaskService {
-    private readonly messageModel;
-    constructor(messageModel: ModelType<TaskModel>);
+    private readonly taskModel;
+    constructor(taskModel: ModelType<TaskModel>);
     create(dto: CreateTaskDto): Promise<import("mongoose").Document<import("mongoose").Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, TaskModel> & TaskModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{
         _id: import("mongoose").Types.ObjectId;
     }>>;

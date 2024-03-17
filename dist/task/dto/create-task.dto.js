@@ -29,19 +29,19 @@ __decorate([
 ], CreateTaskDto.prototype, "name", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsMongoId)({ message: 'Category_id must be a valid MongoDB ObjectId' }),
+    (0, class_validator_1.IsMongoId)({ message: 'todo_id must be a valid MongoDB ObjectId' }),
     (0, swagger_1.ApiProperty)({
-        description: 'The MongoDB ObjectId of the category this task belongs to',
+        description: 'The MongoDB ObjectId of the todo this task belongs to',
         example: '507f191e810c19729de860ea',
         type: 'string',
     }),
     __metadata("design:type", mongoose_1.Types.ObjectId)
-], CreateTaskDto.prototype, "categoryId", void 0);
+], CreateTaskDto.prototype, "todoId", void 0);
 __decorate([
     (0, class_validator_1.IsEnum)(task_status_1.StatusType),
     (0, class_validator_1.IsOptional)(),
     (0, swagger_1.ApiPropertyOptional)({
-        description: 'The status of the category',
+        description: 'The status of the todo',
         enum: task_status_1.StatusType,
         example: task_status_1.StatusType.IN_PROGRESS,
     }),

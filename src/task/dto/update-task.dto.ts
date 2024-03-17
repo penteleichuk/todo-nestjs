@@ -21,16 +21,16 @@ export class UpdateTaskDto {
 	name: string
 
 	@IsNotEmpty()
-	@IsMongoId({ message: 'Category_id must be a valid MongoDB ObjectId' })
+	@IsMongoId({ message: 'taskId must be a valid MongoDB ObjectId' })
 	@ApiProperty({
-		description: 'The MongoDB ObjectId of the category this task belongs to',
+		description: 'The MongoDB ObjectId of the task this task belongs to',
 		example: '507f191e810c19729de860ea',
 	})
 	taskId: Types.ObjectId
 
 	@IsOptional()
 	@ApiPropertyOptional({
-		description: 'The status of the category',
+		description: 'The status of the task',
 		enum: StatusType,
 		example: StatusType.IN_PROGRESS,
 	})

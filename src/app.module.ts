@@ -4,11 +4,11 @@ import { TypegooseModule } from 'nestjs-typegoose'
 import { AccountActivationModule } from './account-activation/account-activation.module'
 import { AdminModule } from './admin/admin.module'
 import { AuthModule } from './auth/auth.module'
-import { СategoryModule } from './category/category.module'
 import { ForgotModule } from './forgot/forgot.module'
 import { MailModule } from './mail/mail.module'
 import { getMongoDbConfig } from './shared/config/mongo.config'
 import { TaskModule } from './task/task.module'
+import { TodoModule } from './todo/todo.module'
 import { UserModule } from './user/user.module'
 
 @Module({
@@ -25,7 +25,7 @@ import { UserModule } from './user/user.module'
 		AdminModule,
 		ForgotModule,
 		AccountActivationModule,
-		СategoryModule,
+		TodoModule,
 		TaskModule,
 	],
 })

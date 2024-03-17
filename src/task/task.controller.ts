@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Patch, Post } from '@nestjs/common'
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { Types } from 'mongoose'
-import { Auth } from '../auth/decorators/auth.decorator'
-import { User } from '../user/decorators/user.decorator'
+import { Auth } from './../auth/decorators/auth.decorator'
+import { User } from './../user/decorators/user.decorator'
 import { CreateTaskDto } from './dto/create-task.dto'
 import { DeleteTaskDto } from './dto/delete-task.dto'
 import { UpdateTaskDto } from './dto/update-task.dto'
@@ -38,7 +38,7 @@ export class TaskController {
 	@ApiBody({ type: UpdateTaskDto })
 	@ApiResponse({
 		status: 200,
-		description: 'Update category user',
+		description: 'Update todo user',
 		type: Promise<UpdateTaskDto>,
 	})
 	async update(

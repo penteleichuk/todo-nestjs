@@ -1,7 +1,7 @@
-import { UserType } from 'src/user/types/user.type'
 import { TaskType } from './../../task/types/task.type'
+import { UserType } from './../../user/types/user.type'
 
-export type CategoryType = {
+export type TodoType = {
 	name: string
 	author: UserType
 	tasks?: TaskType[]
