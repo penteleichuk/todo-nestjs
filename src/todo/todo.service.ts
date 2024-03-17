@@ -84,15 +84,19 @@ export class TodoService {
 	}
 
 	async swapTodoOrders(dto: SwapOrderTodoDto) {
-		const firstTodo = await this.todoModel.findOne({
-			author: dto.author,
-			_id: dto.firstTodoId,
-		})
+		const firstTodo = await this.todoModel
+			.findOne({
+				author: dto.author,
+				_id: dto.firstTodoId,
+			})
+			.select('-author')
 
-		const secondTodo = await this.todoModel.findOne({
-			author: dto.author,
-			_id: dto.secondTodoId,
-		})
+		const secondTodo = await this.todoModel
+			.findOne({
+				author: dto.author,
+				_id: dto.secondTodoId,
+			})
+			.select('-author')
 
 		if (!firstTodo || !secondTodo) {
 			throw new BadRequestException('One or both todos not found')
