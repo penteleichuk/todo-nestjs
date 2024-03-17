@@ -11,8 +11,8 @@ const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const nestjs_typegoose_1 = require("nestjs-typegoose");
 const auth_module_1 = require("./auth/auth.module");
+const email_activation_module_1 = require("./email-activation/email-activation.module");
 const forgot_module_1 = require("./forgot/forgot.module");
-const mail_activation_module_1 = require("./mail-activation/mail-activation.module");
 const mail_module_1 = require("./mail/mail.module");
 const mongo_config_1 = require("./shared/config/mongo.config");
 const task_module_1 = require("./task/task.module");
@@ -33,7 +33,7 @@ AppModule = __decorate([
             user_module_1.UserModule,
             mail_module_1.MailModule,
             forgot_module_1.ForgotModule,
-            mail_activation_module_1.MailActivationModule,
+            email_activation_module_1.MailActivationModule,
             todo_module_1.TodoModule,
             task_module_1.TaskModule,
         ],

@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { TypegooseModule } from 'nestjs-typegoose'
 import { UserModel } from './../user/user.model'
-import { MailActivationController } from './mail-activation.controller'
-import { MailActivationService } from './mail-activation.service'
+import { EmailActivationController } from './email-activation.controller'
+import { EmailActivationService } from './email-activation.service'
 
 @Module({
-	controllers: [MailActivationController],
+	controllers: [EmailActivationController],
 	imports: [
 		TypegooseModule.forFeature([
 			{
@@ -18,6 +18,6 @@ import { MailActivationService } from './mail-activation.service'
 		]),
 		ConfigModule,
 	],
-	providers: [MailActivationService],
+	providers: [EmailActivationService],
 })
 export class MailActivationModule {}

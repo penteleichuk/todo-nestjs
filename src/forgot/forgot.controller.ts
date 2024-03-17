@@ -9,7 +9,7 @@ import { ForgotService } from './forgot.service'
 export class ForgotController {
 	constructor(private readonly ForgotService: ForgotService) {}
 
-	@Post('token')
+	@Post('access-token')
 	@HttpCode(200)
 	@ApiBody({ type: GetTokenForgotDto })
 	@ApiBadRequestResponse({ description: 'Invalid user' })
@@ -17,7 +17,7 @@ export class ForgotController {
 		return this.ForgotService.forgotGetToken(dto)
 	}
 
-	@Post('accept')
+	@Post('accept-token')
 	@HttpCode(200)
 	@ApiBody({ type: AcceptForgotDto })
 	@ApiBadRequestResponse({ description: 'The token is incorrect' })

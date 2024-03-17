@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { UserModel } from '../../user/user.model'
+import { UserModel } from './../../user/user.model'
 
 export class AuthResponseDto {
 	@ApiProperty({

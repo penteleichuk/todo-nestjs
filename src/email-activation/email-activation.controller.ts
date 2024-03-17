@@ -11,32 +11,34 @@ import { ApiBadRequestResponse, ApiBody, ApiTags } from '@nestjs/swagger'
 import { Types } from 'mongoose'
 import { Auth } from './../auth/decorators/auth.decorator'
 import { User } from './../user/decorators/user.decorator'
-import { MailActivationDto } from './dto/mail-activation.dto'
-import { MailActivationService } from './mail-activation.service'
+import { EmailActivationDto } from './dto/email-activation.dto'
+import { EmailActivationService } from './email-activation.service'
 
 @ApiTags('Email activation')
-@Controller('activation')
-export class MailActivationController {
-	constructor(private readonly mailActivationService: MailActivationService) {}
+@Controller('email')
+export class EmailActivationController {
+	constructor(
+		private readonly emailActivationService: EmailActivationService
+	) {}
 
-	@Get('token')
+	@Get('access-token')
 	@HttpCode(200)
 	@Auth()
 	@ApiBadRequestResponse({ description: 'Invalid user' })
 	async activationToken(@User('_id') _id: Types.ObjectId) {
-		return this.mailActivationService.activationToken(_id)
+		return this.emailActivationService.activationToken(_id)
 	}
 
 	@UsePipes(new ValidationPipe())
-	@Post('accept')
+	@Post('accept-token')
 	@HttpCode(200)
 	@Auth()
-	@ApiBody({ type: MailActivationDto })
+	@ApiBody({ type: EmailActivationDto })
 	@ApiBadRequestResponse({ description: 'Invalid token' })
 	async activationAccept(
 		@User('_id') author: Types.ObjectId,
-		@Body() dto: MailActivationDto
+		@Body() dto: EmailActivationDto
 	) {
-		return this.mailActivationService.activationAccept({ ...dto, author })
+		return this.emailActivationService.activationAccept({ ...dto, author })
 	}
 }
