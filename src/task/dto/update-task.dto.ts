@@ -11,22 +11,22 @@ import { StatusType } from './../../shared/consts/task-status'
 
 export class UpdateTaskDto {
 	@IsNotEmpty()
-	@IsString()
-	@MaxLength(120)
-	@ApiProperty({
-		description: 'The name of the task',
-		maxLength: 120,
-		example: 'Implement new feature',
-	})
-	name: string
-
-	@IsNotEmpty()
 	@IsMongoId({ message: 'taskId must be a valid MongoDB ObjectId' })
 	@ApiProperty({
 		description: 'The MongoDB ObjectId of the task this task belongs to',
 		example: '507f191e810c19729de860ea',
 	})
 	taskId: string
+
+	@IsNotEmpty()
+	@IsString()
+	@MaxLength(120)
+	@ApiPropertyOptional({
+		description: 'The name of the task',
+		maxLength: 120,
+		example: 'Implement new feature',
+	})
+	name: string
 
 	@IsOptional()
 	@ApiPropertyOptional({

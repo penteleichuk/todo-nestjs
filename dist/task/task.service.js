@@ -26,12 +26,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskService = void 0;
 const common_1 = require("@nestjs/common");
 const nestjs_typegoose_1 = require("nestjs-typegoose");
+const todo_model_1 = require("./../todo/todo.model");
 const task_model_1 = require("./task.model");
 let TaskService = class TaskService {
-    constructor(taskModel) {
+    constructor(taskModel, todoModel) {
         this.taskModel = taskModel;
+        this.todoModel = todoModel;
     }
     async create(dto) {
+        const existTodo = await this.todoModel.findById(dto.todoId);
+        if (!existTodo) {
+            throw new common_1.NotFoundException('Todo not found');
+        }
         const maxOrderTask = await this.taskModel
             .findOne({ todo: dto.todoId, author: dto.author })
             .sort({ order: -1 })
@@ -47,7 +53,7 @@ let TaskService = class TaskService {
             author: dto.author,
         });
         if (!taskToDelete) {
-            throw new Error('Task not found');
+            throw new common_1.NotFoundException('Task not found');
         }
         const deletedOrder = taskToDelete.order;
         const todoId = taskToDelete.todo;
@@ -88,7 +94,8 @@ let TaskService = class TaskService {
 TaskService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, nestjs_typegoose_1.InjectModel)(task_model_1.TaskModel)),
-    __metadata("design:paramtypes", [Object])
+    __param(1, (0, nestjs_typegoose_1.InjectModel)(todo_model_1.TodoModel)),
+    __metadata("design:paramtypes", [Object, Object])
 ], TaskService);
 exports.TaskService = TaskService;
 //# sourceMappingURL=task.service.js.map

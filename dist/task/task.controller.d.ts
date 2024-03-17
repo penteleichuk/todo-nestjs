@@ -27,14 +27,15 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { DeleteTaskDto } from './dto/delete-task.dto';
 import { SwapOrderTaskDto } from './dto/swap-order-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { TaskModel } from './task.model';
 import { TaskService } from './task.service';
 export declare class TaskController {
     private readonly taskService;
     constructor(taskService: TaskService);
     create(author: Types.ObjectId, dto: CreateTaskDto): Promise<{
         name: string;
-        createdAt?: Date;
-        updatedAt?: Date;
+        createdAt: Date;
+        updatedAt: Date;
         _id: Types.ObjectId;
         id: string;
         status: import("../shared/consts/task-status").StatusType;
@@ -42,8 +43,8 @@ export declare class TaskController {
     }>;
     delete(author: Types.ObjectId, dto: DeleteTaskDto): Promise<{
         name: string;
-        createdAt?: Date;
-        updatedAt?: Date;
+        createdAt: Date;
+        updatedAt: Date;
         _id: Types.ObjectId;
         id: string;
         status: import("../shared/consts/task-status").StatusType;
@@ -51,14 +52,14 @@ export declare class TaskController {
     }>;
     update(author: Types.ObjectId, dto: UpdateTaskDto): Promise<{
         name: string;
-        createdAt?: Date;
-        updatedAt?: Date;
+        createdAt: Date;
+        updatedAt: Date;
         _id: Types.ObjectId;
         id: string;
         status: import("../shared/consts/task-status").StatusType;
         order: number;
     }>;
-    swapTodoOrders(author: Types.ObjectId, dto: SwapOrderTaskDto): Promise<(import("mongoose").Document<Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, import("./task.model").TaskModel> & import("./task.model").TaskModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{
+    swapTodoOrders(author: Types.ObjectId, dto: SwapOrderTaskDto): Promise<(import("mongoose").Document<Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, TaskModel> & TaskModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{
         _id: Types.ObjectId;
     }>)[]>;
 }

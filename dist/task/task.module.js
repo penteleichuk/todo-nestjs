@@ -10,6 +10,7 @@ exports.TaskModule = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const nestjs_typegoose_1 = require("nestjs-typegoose");
+const todo_model_1 = require("./../todo/todo.model");
 const task_controller_1 = require("./task.controller");
 const task_model_1 = require("./task.model");
 const task_service_1 = require("./task.service");
@@ -24,6 +25,13 @@ TaskModule = __decorate([
                     typegooseClass: task_model_1.TaskModel,
                     schemaOptions: {
                         collection: 'Task',
+                        versionKey: false,
+                    },
+                },
+                {
+                    typegooseClass: todo_model_1.TodoModel,
+                    schemaOptions: {
+                        collection: 'Todo',
                         versionKey: false,
                     },
                 },

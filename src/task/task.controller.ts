@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Patch, Post } from '@nestjs/common'
-import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger'
+import { ApiBody, ApiCreatedResponse, ApiTags } from '@nestjs/swagger'
 import { Types } from 'mongoose'
 import { Auth } from './../auth/decorators/auth.decorator'
 import { User } from './../user/decorators/user.decorator'
@@ -7,6 +7,7 @@ import { CreateTaskDto } from './dto/create-task.dto'
 import { DeleteTaskDto } from './dto/delete-task.dto'
 import { SwapOrderTaskDto } from './dto/swap-order-task.dto'
 import { UpdateTaskDto } from './dto/update-task.dto'
+import { TaskModel } from './task.model'
 import { TaskService } from './task.service'
 
 @ApiTags('task')
@@ -17,6 +18,10 @@ export class TaskController {
 	@Auth()
 	@Post()
 	@ApiBody({ type: CreateTaskDto })
+	@ApiCreatedResponse({
+		description: 'Created task object as response.',
+		type: TaskModel,
+	})
 	async create(
 		@User('_id') author: Types.ObjectId,
 		@Body() dto: CreateTaskDto
@@ -27,6 +32,10 @@ export class TaskController {
 	@Auth()
 	@Delete()
 	@ApiBody({ type: DeleteTaskDto })
+	@ApiCreatedResponse({
+		description: 'Deleted task object as response.',
+		type: TaskModel,
+	})
 	async delete(
 		@User('_id') author: Types.ObjectId,
 		@Body() dto: DeleteTaskDto
@@ -37,10 +46,9 @@ export class TaskController {
 	@Auth()
 	@Patch()
 	@ApiBody({ type: UpdateTaskDto })
-	@ApiResponse({
-		status: 200,
-		description: 'Update task user',
-		type: UpdateTaskDto,
+	@ApiCreatedResponse({
+		description: 'Updating task object as response.',
+		type: TaskModel,
 	})
 	async update(
 		@User('_id') author: Types.ObjectId,
@@ -52,10 +60,12 @@ export class TaskController {
 	@Auth()
 	@Post('/swap-orders')
 	@ApiBody({ type: SwapOrderTaskDto })
-	@ApiResponse({
+	@ApiCreatedResponse({
 		status: 200,
-		description: 'Swap task orders',
-		type: SwapOrderTaskDto,
+		description:
+			'Returns an array of two TaskModel objects representing swapped tasks.',
+		type: TaskModel,
+		isArray: true,
 	})
 	async swapTodoOrders(
 		@User('_id') author: Types.ObjectId,

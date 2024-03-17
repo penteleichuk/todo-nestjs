@@ -22,6 +22,7 @@ const create_task_dto_1 = require("./dto/create-task.dto");
 const delete_task_dto_1 = require("./dto/delete-task.dto");
 const swap_order_task_dto_1 = require("./dto/swap-order-task.dto");
 const update_task_dto_1 = require("./dto/update-task.dto");
+const task_model_1 = require("./task.model");
 const task_service_1 = require("./task.service");
 let TaskController = class TaskController {
     constructor(taskService) {
@@ -44,6 +45,10 @@ __decorate([
     (0, auth_decorator_1.Auth)(),
     (0, common_1.Post)(),
     (0, swagger_1.ApiBody)({ type: create_task_dto_1.CreateTaskDto }),
+    (0, swagger_1.ApiCreatedResponse)({
+        description: 'Created task object as response.',
+        type: task_model_1.TaskModel,
+    }),
     __param(0, (0, user_decorator_1.User)('_id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -54,6 +59,10 @@ __decorate([
     (0, auth_decorator_1.Auth)(),
     (0, common_1.Delete)(),
     (0, swagger_1.ApiBody)({ type: delete_task_dto_1.DeleteTaskDto }),
+    (0, swagger_1.ApiCreatedResponse)({
+        description: 'Deleted task object as response.',
+        type: task_model_1.TaskModel,
+    }),
     __param(0, (0, user_decorator_1.User)('_id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -64,10 +73,9 @@ __decorate([
     (0, auth_decorator_1.Auth)(),
     (0, common_1.Patch)(),
     (0, swagger_1.ApiBody)({ type: update_task_dto_1.UpdateTaskDto }),
-    (0, swagger_1.ApiResponse)({
-        status: 200,
-        description: 'Update task user',
-        type: update_task_dto_1.UpdateTaskDto,
+    (0, swagger_1.ApiCreatedResponse)({
+        description: 'Updating task object as response.',
+        type: task_model_1.TaskModel,
     }),
     __param(0, (0, user_decorator_1.User)('_id')),
     __param(1, (0, common_1.Body)()),
@@ -79,10 +87,11 @@ __decorate([
     (0, auth_decorator_1.Auth)(),
     (0, common_1.Post)('/swap-orders'),
     (0, swagger_1.ApiBody)({ type: swap_order_task_dto_1.SwapOrderTaskDto }),
-    (0, swagger_1.ApiResponse)({
+    (0, swagger_1.ApiCreatedResponse)({
         status: 200,
-        description: 'Swap task orders',
-        type: swap_order_task_dto_1.SwapOrderTaskDto,
+        description: 'Returns an array of two TaskModel objects representing swapped tasks.',
+        type: task_model_1.TaskModel,
+        isArray: true,
     }),
     __param(0, (0, user_decorator_1.User)('_id')),
     __param(1, (0, common_1.Body)()),

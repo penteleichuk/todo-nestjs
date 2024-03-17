@@ -24,6 +24,7 @@
 /// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype" />
 import { ModelType } from '@typegoose/typegoose/lib/types';
+import { TodoModel } from './../todo/todo.model';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { DeleteTaskDto } from './dto/delete-task.dto';
 import { SwapOrderTaskDto } from './dto/swap-order-task.dto';
@@ -31,33 +32,34 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 import { TaskModel } from './task.model';
 export declare class TaskService {
     private readonly taskModel;
-    constructor(taskModel: ModelType<TaskModel>);
+    private readonly todoModel;
+    constructor(taskModel: ModelType<TaskModel>, todoModel: ModelType<TodoModel>);
     create(dto: CreateTaskDto): Promise<{
         _id: import("mongoose").Types.ObjectId;
         id: string;
         name: string;
-        status: import("../shared/consts/task-status").StatusType;
         order: number;
-        createdAt?: Date;
-        updatedAt?: Date;
+        createdAt: Date;
+        updatedAt: Date;
+        status: import("../shared/consts/task-status").StatusType;
     }>;
     delete(dto: DeleteTaskDto): Promise<{
         _id: import("mongoose").Types.ObjectId;
         id: string;
         name: string;
-        status: import("../shared/consts/task-status").StatusType;
         order: number;
-        createdAt?: Date;
-        updatedAt?: Date;
+        createdAt: Date;
+        updatedAt: Date;
+        status: import("../shared/consts/task-status").StatusType;
     }>;
     update(dto: UpdateTaskDto): Promise<{
         _id: import("mongoose").Types.ObjectId;
         id: string;
         name: string;
-        status: import("../shared/consts/task-status").StatusType;
         order: number;
-        createdAt?: Date;
-        updatedAt?: Date;
+        createdAt: Date;
+        updatedAt: Date;
+        status: import("../shared/consts/task-status").StatusType;
     }>;
     swapTaskOrders(dto: SwapOrderTaskDto): Promise<(import("mongoose").Document<import("mongoose").Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, TaskModel> & TaskModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{
         _id: import("mongoose").Types.ObjectId;
