@@ -20,6 +20,7 @@ const auth_decorator_1 = require("./../auth/decorators/auth.decorator");
 const user_decorator_1 = require("./../user/decorators/user.decorator");
 const create_task_dto_1 = require("./dto/create-task.dto");
 const delete_task_dto_1 = require("./dto/delete-task.dto");
+const get_byid_task_dto_1 = require("./dto/get-byid-task.dto");
 const swap_order_task_dto_1 = require("./dto/swap-order-task.dto");
 const update_task_dto_1 = require("./dto/update-task.dto");
 const task_model_1 = require("./task.model");
@@ -27,6 +28,9 @@ const task_service_1 = require("./task.service");
 let TaskController = class TaskController {
     constructor(taskService) {
         this.taskService = taskService;
+    }
+    async getById(author, dto) {
+        return this.taskService.getById(Object.assign(Object.assign({}, dto), { author }));
     }
     async create(author, dto) {
         return this.taskService.create(Object.assign(Object.assign({}, dto), { author }));
@@ -41,6 +45,19 @@ let TaskController = class TaskController {
         return this.taskService.swapTaskOrders(Object.assign(Object.assign({}, dto), { author }));
     }
 };
+__decorate([
+    (0, auth_decorator_1.Auth)(),
+    (0, common_1.Get)(':id'),
+    (0, swagger_1.ApiCreatedResponse)({
+        description: 'Get todo by id object as response.',
+        type: task_model_1.TaskModel,
+    }),
+    __param(0, (0, user_decorator_1.User)('_id')),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [mongoose_1.Types.ObjectId, get_byid_task_dto_1.GetByIdTaskDto]),
+    __metadata("design:returntype", Promise)
+], TaskController.prototype, "getById", null);
 __decorate([
     (0, auth_decorator_1.Auth)(),
     (0, common_1.Post)(),

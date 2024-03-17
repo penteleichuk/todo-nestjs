@@ -33,6 +33,13 @@ let TaskService = class TaskService {
         this.taskModel = taskModel;
         this.todoModel = todoModel;
     }
+    async getById(dto) {
+        const todo = await this.taskModel
+            .findOne({ author: dto.author, _jd: dto.taskId }, '-author -todo')
+            .sort({ order: 1, createdAt: -1 })
+            .exec();
+        return todo;
+    }
     async create(dto) {
         const existTodo = await this.todoModel.findById(dto.todoId);
         if (!existTodo) {

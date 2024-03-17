@@ -25,6 +25,7 @@
 import { Types } from 'mongoose';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { DeleteTaskDto } from './dto/delete-task.dto';
+import { GetByIdTaskDto } from './dto/get-byid-task.dto';
 import { SwapOrderTaskDto } from './dto/swap-order-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { TaskModel } from './task.model';
@@ -32,6 +33,9 @@ import { TaskService } from './task.service';
 export declare class TaskController {
     private readonly taskService;
     constructor(taskService: TaskService);
+    getById(author: Types.ObjectId, dto: GetByIdTaskDto): Promise<import("mongoose").Document<Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, TaskModel> & TaskModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{
+        _id: Types.ObjectId;
+    }>>;
     create(author: Types.ObjectId, dto: CreateTaskDto): Promise<{
         _id: Types.ObjectId;
         name: string;

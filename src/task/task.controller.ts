@@ -1,10 +1,19 @@
-import { Body, Controller, Delete, Patch, Post } from '@nestjs/common'
+import {
+	Body,
+	Controller,
+	Delete,
+	Get,
+	Param,
+	Patch,
+	Post,
+} from '@nestjs/common'
 import { ApiBody, ApiCreatedResponse, ApiTags } from '@nestjs/swagger'
 import { Types } from 'mongoose'
 import { Auth } from './../auth/decorators/auth.decorator'
 import { User } from './../user/decorators/user.decorator'
 import { CreateTaskDto } from './dto/create-task.dto'
 import { DeleteTaskDto } from './dto/delete-task.dto'
+import { GetByIdTaskDto } from './dto/get-byid-task.dto'
 import { SwapOrderTaskDto } from './dto/swap-order-task.dto'
 import { UpdateTaskDto } from './dto/update-task.dto'
 import { TaskModel } from './task.model'
@@ -14,6 +23,19 @@ import { TaskService } from './task.service'
 @Controller('task')
 export class TaskController {
 	constructor(private readonly taskService: TaskService) {}
+
+	@Auth()
+	@Get(':id')
+	@ApiCreatedResponse({
+		description: 'Get todo by id object as response.',
+		type: TaskModel,
+	})
+	async getById(
+		@User('_id') author: Types.ObjectId,
+		@Param('id') dto: GetByIdTaskDto
+	) {
+		return this.taskService.getById({ ...dto, author })
+	}
 
 	@Auth()
 	@Post()

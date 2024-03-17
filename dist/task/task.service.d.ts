@@ -27,6 +27,7 @@ import { ModelType } from '@typegoose/typegoose/lib/types';
 import { TodoModel } from './../todo/todo.model';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { DeleteTaskDto } from './dto/delete-task.dto';
+import { GetByIdTaskDto } from './dto/get-byid-task.dto';
 import { SwapOrderTaskDto } from './dto/swap-order-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { TaskModel } from './task.model';
@@ -34,32 +35,35 @@ export declare class TaskService {
     private readonly taskModel;
     private readonly todoModel;
     constructor(taskModel: ModelType<TaskModel>, todoModel: ModelType<TodoModel>);
+    getById(dto: GetByIdTaskDto): Promise<import("mongoose").Document<import("mongoose").Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, TaskModel> & TaskModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }>>;
     create(dto: CreateTaskDto): Promise<{
         _id: import("mongoose").Types.ObjectId;
-        name: string;
-        updatedAt: Date;
         id: string;
-        createdAt: Date;
-        order: number;
+        name: string;
         status: import("../shared/consts/task-status").StatusType;
+        order: number;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     delete(dto: DeleteTaskDto): Promise<{
         _id: import("mongoose").Types.ObjectId;
-        name: string;
-        updatedAt: Date;
         id: string;
-        createdAt: Date;
-        order: number;
+        name: string;
         status: import("../shared/consts/task-status").StatusType;
+        order: number;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     update(dto: UpdateTaskDto): Promise<{
         _id: import("mongoose").Types.ObjectId;
-        name: string;
-        updatedAt: Date;
         id: string;
-        createdAt: Date;
-        order: number;
+        name: string;
         status: import("../shared/consts/task-status").StatusType;
+        order: number;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     swapTaskOrders(dto: SwapOrderTaskDto): Promise<(import("mongoose").Document<import("mongoose").Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, TaskModel> & TaskModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{
         _id: import("mongoose").Types.ObjectId;

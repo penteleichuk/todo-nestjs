@@ -4,6 +4,7 @@ import { InjectModel } from 'nestjs-typegoose'
 import { TodoModel } from './../todo/todo.model'
 import { CreateTaskDto } from './dto/create-task.dto'
 import { DeleteTaskDto } from './dto/delete-task.dto'
+import { GetByIdTaskDto } from './dto/get-byid-task.dto'
 import { SwapOrderTaskDto } from './dto/swap-order-task.dto'
 import { UpdateTaskDto } from './dto/update-task.dto'
 import { TaskModel } from './task.model'
@@ -14,6 +15,15 @@ export class TaskService {
 		@InjectModel(TaskModel) private readonly taskModel: ModelType<TaskModel>,
 		@InjectModel(TodoModel) private readonly todoModel: ModelType<TodoModel>
 	) {}
+
+	async getById(dto: GetByIdTaskDto) {
+		const todo = await this.taskModel
+			.findOne({ author: dto.author, _jd: dto.taskId }, '-author -todo')
+			.sort({ order: 1, createdAt: -1 })
+			.exec()
+
+		return todo
+	}
 
 	async create(dto: CreateTaskDto) {
 		const existTodo = await this.todoModel.findById(dto.todoId)
