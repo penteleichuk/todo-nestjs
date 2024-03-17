@@ -7,6 +7,7 @@ export declare class UserModel extends TimeStamps {
     name: string;
     password: string;
     email: string;
+    emailActivate: boolean;
     emailToken: string;
     forgotToken: string;
     tokenUpdatedAt: Date;

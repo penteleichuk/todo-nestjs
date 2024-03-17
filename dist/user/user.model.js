@@ -44,6 +44,15 @@ __decorate([
     __metadata("design:type", String)
 ], UserModel.prototype, "email", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        example: false,
+        description: 'Indicates whether the email of the User has been activated',
+        default: false,
+    }),
+    (0, typegoose_1.prop)({ type: Boolean, default: false }),
+    __metadata("design:type", Boolean)
+], UserModel.prototype, "emailActivate", void 0);
+__decorate([
     (0, typegoose_1.prop)({ type: String }),
     __metadata("design:type", String)
 ], UserModel.prototype, "emailToken", void 0);

@@ -30,6 +30,14 @@ export class UserModel extends TimeStamps {
 	@prop({ unique: true })
 	email: string
 
+	@ApiProperty({
+		example: false,
+		description: 'Indicates whether the email of the User has been activated',
+		default: false,
+	})
+	@prop({ type: Boolean, default: false })
+	emailActivate: boolean
+
 	@prop({ type: String })
 	emailToken: string
 
