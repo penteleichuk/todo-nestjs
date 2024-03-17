@@ -3,6 +3,7 @@ import {
 	Controller,
 	HttpCode,
 	Post,
+	Put,
 	UsePipes,
 	ValidationPipe,
 } from '@nestjs/common'
@@ -33,7 +34,7 @@ export class AuthController {
 
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
-	@Post('access-token')
+	@Put('access-token')
 	@ApiBody({ type: RefreshTokenDto })
 	@ApiResponse({
 		status: 200,

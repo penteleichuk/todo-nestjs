@@ -18,11 +18,11 @@ const bcryptjs_1 = require("bcryptjs");
 const nestjs_typegoose_1 = require("nestjs-typegoose");
 const user_model_1 = require("./user.model");
 let UserService = class UserService {
-    constructor(UserModel) {
-        this.UserModel = UserModel;
+    constructor(userModel) {
+        this.userModel = userModel;
     }
     async getById(_id) {
-        const user = await this.UserModel.findById(_id, {
+        const user = await this.userModel.findById(_id, {
             password: 0,
             createdAt: 0,
             emailToken: 0,
@@ -36,20 +36,34 @@ let UserService = class UserService {
         return user;
     }
     async changePassword(_id, dto) {
-        const user = await this.UserModel.findById(_id);
+        const user = await this.userModel.findById(_id);
+        if (!user) {
+            throw new common_1.NotFoundException('User not found.');
+        }
         const isValidPassword = await (0, bcryptjs_1.compare)(dto.password, user.password);
         if (!isValidPassword) {
-            throw new common_1.NotFoundException('Password incorect.');
+            throw new common_1.BadRequestException('Incorrect password.');
         }
         if (dto.newPassword !== dto.repeatPassword) {
-            throw new common_1.NotFoundException('Password double incorect.');
+            throw new common_1.BadRequestException('Passwords do not match.');
         }
         if (dto.password) {
             const salt = await (0, bcryptjs_1.genSalt)(10);
             user.password = await (0, bcryptjs_1.hash)(dto.password, salt);
         }
-        const { _id: userId, name, email, updatedAt, } = (await user.save({ timestamps: true })).toJSON();
-        return { _id: userId, name, email, updatedAt };
+        await user.save();
+        return {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            updatedAt: user.updatedAt,
+        };
+    }
+    async updateProfile(dto) {
+        const user = await this.userModel.findOneAndUpdate({
+            _id: dto.author,
+        }, { name: dto.name }, { new: true, select: '_id name email updatedAt' });
+        return user;
     }
 };
 UserService = __decorate([

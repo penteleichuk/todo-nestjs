@@ -6,6 +6,7 @@ import {
 	Param,
 	Patch,
 	Post,
+	Put,
 } from '@nestjs/common'
 import { ApiBody, ApiCreatedResponse, ApiTags } from '@nestjs/swagger'
 import { Types } from 'mongoose'
@@ -27,7 +28,7 @@ export class TaskController {
 	@Auth()
 	@Get(':id')
 	@ApiCreatedResponse({
-		description: 'Get todo by id object as response.',
+		description: 'Get task by id object as response.',
 		type: TaskModel,
 	})
 	async getById(
@@ -80,7 +81,7 @@ export class TaskController {
 	}
 
 	@Auth()
-	@Post('/swap-orders')
+	@Put('/swap-orders')
 	@ApiBody({ type: SwapOrderTaskDto })
 	@ApiCreatedResponse({
 		description:

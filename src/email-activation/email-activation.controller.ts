@@ -3,7 +3,7 @@ import {
 	Controller,
 	Get,
 	HttpCode,
-	Post,
+	Put,
 	UsePipes,
 	ValidationPipe,
 } from '@nestjs/common'
@@ -30,7 +30,7 @@ export class EmailActivationController {
 	}
 
 	@UsePipes(new ValidationPipe())
-	@Post('accept-token')
+	@Put('accept-token')
 	@HttpCode(200)
 	@Auth()
 	@ApiBody({ type: EmailActivationDto })

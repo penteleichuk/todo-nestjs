@@ -6,6 +6,7 @@ import {
 	Param,
 	Patch,
 	Post,
+	Put,
 } from '@nestjs/common'
 import { ApiBody, ApiCreatedResponse, ApiTags } from '@nestjs/swagger'
 import { Types } from 'mongoose'
@@ -91,7 +92,7 @@ export class TodoController {
 	}
 
 	@Auth()
-	@Post('/swap-orders')
+	@Put('/swap-orders')
 	@ApiBody({ type: SwapOrderTodoDto })
 	@ApiCreatedResponse({
 		status: 200,

@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, Post } from '@nestjs/common'
+import { Body, Controller, HttpCode, Post, Put } from '@nestjs/common'
 import { ApiBadRequestResponse, ApiBody, ApiTags } from '@nestjs/swagger'
 import { AcceptForgotDto } from './dto/accept-forgot.dto'
 import { GetTokenForgotDto } from './dto/get-token-forgot.dto'
@@ -17,7 +17,7 @@ export class ForgotController {
 		return this.ForgotService.forgotGetToken(dto)
 	}
 
-	@Post('accept-token')
+	@Put('accept-token')
 	@HttpCode(200)
 	@ApiBody({ type: AcceptForgotDto })
 	@ApiBadRequestResponse({ description: 'The token is incorrect' })

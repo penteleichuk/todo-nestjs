@@ -40,7 +40,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ForgotController.prototype, "forgotGetToken", null);
 __decorate([
-    (0, common_1.Post)('accept-token'),
+    (0, common_1.Put)('accept-token'),
     (0, common_1.HttpCode)(200),
     (0, swagger_1.ApiBody)({ type: accept_forgot_dto_1.AcceptForgotDto }),
     (0, swagger_1.ApiBadRequestResponse)({ description: 'The token is incorrect' }),

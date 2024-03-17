@@ -19,17 +19,21 @@ const mongoose_1 = require("mongoose");
 const auth_decorator_1 = require("./../auth/decorators/auth.decorator");
 const user_decorator_1 = require("./decorators/user.decorator");
 const change_password_dto_1 = require("./dto/change-password.dto");
+const update_profile_dto_1 = require("./dto/update-profile.dto");
 const user_model_1 = require("./user.model");
 const user_service_1 = require("./user.service");
 let UserController = class UserController {
-    constructor(UserService) {
-        this.UserService = UserService;
+    constructor(userService) {
+        this.userService = userService;
     }
     async getProfile(_id) {
-        return this.UserService.getById(_id);
+        return this.userService.getById(_id);
+    }
+    async updateProfile(author, dto) {
+        return this.userService.updateProfile(Object.assign(Object.assign({}, dto), { author }));
     }
     async changePassword(_id, dto) {
-        return this.UserService.changePassword(_id, dto);
+        return this.userService.changePassword(_id, dto);
     }
 };
 __decorate([
@@ -45,6 +49,20 @@ __decorate([
     __metadata("design:paramtypes", [mongoose_1.Types.ObjectId]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getProfile", null);
+__decorate([
+    (0, auth_decorator_1.Auth)(),
+    (0, common_1.Patch)(),
+    (0, swagger_1.ApiBody)({ type: update_profile_dto_1.UpdateProfileDto }),
+    (0, swagger_1.ApiCreatedResponse)({
+        description: 'Updating profile object as response.',
+        type: user_model_1.UserModel,
+    }),
+    __param(0, (0, user_decorator_1.User)('_id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [mongoose_1.Types.ObjectId, update_profile_dto_1.UpdateProfileDto]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "updateProfile", null);
 __decorate([
     (0, common_1.Post)('/change-password'),
     (0, common_1.UsePipes)(new common_1.ValidationPipe()),

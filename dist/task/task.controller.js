@@ -49,7 +49,7 @@ __decorate([
     (0, auth_decorator_1.Auth)(),
     (0, common_1.Get)(':id'),
     (0, swagger_1.ApiCreatedResponse)({
-        description: 'Get todo by id object as response.',
+        description: 'Get task by id object as response.',
         type: task_model_1.TaskModel,
     }),
     __param(0, (0, user_decorator_1.User)('_id')),
@@ -102,7 +102,7 @@ __decorate([
 ], TaskController.prototype, "update", null);
 __decorate([
     (0, auth_decorator_1.Auth)(),
-    (0, common_1.Post)('/swap-orders'),
+    (0, common_1.Put)('/swap-orders'),
     (0, swagger_1.ApiBody)({ type: swap_order_task_dto_1.SwapOrderTaskDto }),
     (0, swagger_1.ApiCreatedResponse)({
         description: 'Returns an array of two task objects representing swapped tasks.',

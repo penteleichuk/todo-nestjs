@@ -1,19 +1,24 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import {
+	BadRequestException,
+	Injectable,
+	NotFoundException,
+} from '@nestjs/common'
 import { ModelType } from '@typegoose/typegoose/lib/types'
 import { compare, genSalt, hash } from 'bcryptjs'
 import { Types } from 'mongoose'
 import { InjectModel } from 'nestjs-typegoose'
 import { ChangePasswordDto } from './dto/change-password.dto'
+import { UpdateProfileDto } from './dto/update-profile.dto'
 import { UserModel } from './user.model'
 
 @Injectable()
 export class UserService {
 	constructor(
-		@InjectModel(UserModel) private readonly UserModel: ModelType<UserModel>
+		@InjectModel(UserModel) private readonly userModel: ModelType<UserModel>
 	) {}
 
 	async getById(_id: Types.ObjectId) {
-		const user = await this.UserModel.findById(_id, {
+		const user = await this.userModel.findById(_id, {
 			password: 0,
 			createdAt: 0,
 			emailToken: 0,
@@ -30,15 +35,19 @@ export class UserService {
 	}
 
 	async changePassword(_id: Types.ObjectId, dto: ChangePasswordDto) {
-		const user = await this.UserModel.findById(_id)
+		const user = await this.userModel.findById(_id)
+
+		if (!user) {
+			throw new NotFoundException('User not found.')
+		}
 
 		const isValidPassword = await compare(dto.password, user.password)
 		if (!isValidPassword) {
-			throw new NotFoundException('Password incorect.')
+			throw new BadRequestException('Incorrect password.')
 		}
 
 		if (dto.newPassword !== dto.repeatPassword) {
-			throw new NotFoundException('Password double incorect.')
+			throw new BadRequestException('Passwords do not match.')
 		}
 
 		if (dto.password) {
@@ -46,13 +55,25 @@ export class UserService {
 			user.password = await hash(dto.password, salt)
 		}
 
-		const {
-			_id: userId,
-			name,
-			email,
-			updatedAt,
-		} = (await user.save({ timestamps: true })).toJSON()
+		await user.save()
 
-		return { _id: userId, name, email, updatedAt }
+		return {
+			_id: user._id,
+			name: user.name,
+			email: user.email,
+			updatedAt: user.updatedAt,
+		}
+	}
+
+	async updateProfile(dto: UpdateProfileDto) {
+		const user = await this.userModel.findOneAndUpdate(
+			{
+				_id: dto.author,
+			},
+			{ name: dto.name },
+			{ new: true, select: '_id name email updatedAt' }
+		)
+
+		return user
 	}
 }

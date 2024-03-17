@@ -52,7 +52,7 @@ __decorate([
 __decorate([
     (0, common_1.UsePipes)(new common_1.ValidationPipe()),
     (0, common_1.HttpCode)(200),
-    (0, common_1.Post)('access-token'),
+    (0, common_1.Put)('access-token'),
     (0, swagger_1.ApiBody)({ type: refreshToken_dto_1.RefreshTokenDto }),
     (0, swagger_1.ApiResponse)({
         status: 200,

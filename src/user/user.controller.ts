@@ -3,6 +3,7 @@ import {
 	Controller,
 	Get,
 	HttpCode,
+	Patch,
 	Post,
 	UsePipes,
 	ValidationPipe,
@@ -12,13 +13,14 @@ import { Types } from 'mongoose'
 import { Auth } from './../auth/decorators/auth.decorator'
 import { User } from './decorators/user.decorator'
 import { ChangePasswordDto } from './dto/change-password.dto'
+import { UpdateProfileDto } from './dto/update-profile.dto'
 import { UserModel } from './user.model'
 import { UserService } from './user.service'
 
 @ApiTags('User')
 @Controller('user')
 export class UserController {
-	constructor(private readonly UserService: UserService) {}
+	constructor(private readonly userService: UserService) {}
 
 	@Get('/')
 	@HttpCode(200)
@@ -28,7 +30,21 @@ export class UserController {
 		type: UserModel,
 	})
 	async getProfile(@User('_id') _id: Types.ObjectId) {
-		return this.UserService.getById(_id)
+		return this.userService.getById(_id)
+	}
+
+	@Auth()
+	@Patch()
+	@ApiBody({ type: UpdateProfileDto })
+	@ApiCreatedResponse({
+		description: 'Updating profile object as response.',
+		type: UserModel,
+	})
+	async updateProfile(
+		@User('_id') author: Types.ObjectId,
+		@Body() dto: UpdateProfileDto
+	) {
+		return this.userService.updateProfile({ ...dto, author })
 	}
 
 	@Post('/change-password')
@@ -44,6 +60,6 @@ export class UserController {
 		@User('_id') _id: Types.ObjectId,
 		@Body() dto: ChangePasswordDto
 	) {
-		return this.UserService.changePassword(_id, dto)
+		return this.userService.changePassword(_id, dto)
 	}
 }

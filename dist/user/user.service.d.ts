@@ -25,10 +25,11 @@
 import { ModelType } from '@typegoose/typegoose/lib/types';
 import { Types } from 'mongoose';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { UpdateProfileDto } from './dto/update-profile.dto';
 import { UserModel } from './user.model';
 export declare class UserService {
-    private readonly UserModel;
-    constructor(UserModel: ModelType<UserModel>);
+    private readonly userModel;
+    constructor(userModel: ModelType<UserModel>);
     getById(_id: Types.ObjectId): Promise<import("mongoose").Document<Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, UserModel> & UserModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{
         _id: Types.ObjectId;
     }>>;
@@ -38,4 +39,7 @@ export declare class UserService {
         email: string;
         updatedAt: Date;
     }>;
+    updateProfile(dto: UpdateProfileDto): Promise<import("mongoose").Document<Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, UserModel> & UserModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{
+        _id: Types.ObjectId;
+    }>>;
 }
