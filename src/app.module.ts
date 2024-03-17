@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypegooseModule } from 'nestjs-typegoose'
-import { AdminModule } from './admin/admin.module'
 import { AuthModule } from './auth/auth.module'
 import { ForgotModule } from './forgot/forgot.module'
 import { MailActivationModule } from './mail-activation/mail-activation.module'
@@ -22,7 +21,6 @@ import { UserModule } from './user/user.module'
 		AuthModule,
 		UserModule,
 		MailModule,
-		AdminModule,
 		ForgotModule,
 		MailActivationModule,
 		TodoModule,

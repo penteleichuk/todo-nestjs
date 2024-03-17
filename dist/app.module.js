@@ -10,7 +10,6 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const nestjs_typegoose_1 = require("nestjs-typegoose");
-const admin_module_1 = require("./admin/admin.module");
 const auth_module_1 = require("./auth/auth.module");
 const forgot_module_1 = require("./forgot/forgot.module");
 const mail_activation_module_1 = require("./mail-activation/mail-activation.module");
@@ -33,7 +32,6 @@ AppModule = __decorate([
             auth_module_1.AuthModule,
             user_module_1.UserModule,
             mail_module_1.MailModule,
-            admin_module_1.AdminModule,
             forgot_module_1.ForgotModule,
             mail_activation_module_1.MailActivationModule,
             todo_module_1.TodoModule,
