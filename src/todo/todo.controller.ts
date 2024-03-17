@@ -5,6 +5,7 @@ import { Auth } from './../auth/decorators/auth.decorator'
 import { User } from './../user/decorators/user.decorator'
 import { CreateTodoDto } from './dto/create-todo.dto'
 import { DeleteTodoDto } from './dto/delete-todo.dto'
+import { SwapOrderTodoDto } from './dto/swap-order-todo.dto'
 import { UpdateTodoDto } from './dto/update-todo.dto'
 import { TodoService } from './todo.service'
 
@@ -69,5 +70,20 @@ export class TodoController {
 		@Body() dto: UpdateTodoDto
 	) {
 		return this.todoService.update({ ...dto, author })
+	}
+
+	@Auth()
+	@Post('/swap-orders')
+	@ApiBody({ type: SwapOrderTodoDto })
+	@ApiResponse({
+		status: 200,
+		description: 'Swap todo orders',
+		type: SwapOrderTodoDto,
+	})
+	async swapTodoOrders(
+		@User('_id') author: Types.ObjectId,
+		@Body() dto: SwapOrderTodoDto
+	) {
+		return this.todoService.swapTodoOrders({ ...dto, author })
 	}
 }

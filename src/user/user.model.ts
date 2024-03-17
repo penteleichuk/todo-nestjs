@@ -9,9 +9,6 @@ export class UserModel extends TimeStamps {
 	name: string
 
 	@prop({ default: false, type: Boolean })
-	isAdmin: boolean
-
-	@prop({ default: false, type: Boolean })
 	isBanned: boolean
 
 	@prop({ type: String })

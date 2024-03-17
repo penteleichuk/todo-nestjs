@@ -8,24 +8,24 @@ export declare class TaskController {
     constructor(taskService: TaskService);
     create(author: Types.ObjectId, dto: CreateTaskDto): Promise<{
         name: string;
-        status: import("../shared/consts/task-status").StatusType;
         _id: Types.ObjectId;
+        status: import("../shared/consts/task-status").StatusType;
         createdAt?: Date;
         updatedAt?: Date;
         id: string;
     }>;
     delete(author: Types.ObjectId, dto: DeleteTaskDto): Promise<{
         name: string;
-        status: import("../shared/consts/task-status").StatusType;
         _id: Types.ObjectId;
+        status: import("../shared/consts/task-status").StatusType;
         createdAt?: Date;
         updatedAt?: Date;
         id: string;
     }>;
     update(author: Types.ObjectId, dto: UpdateTaskDto): Promise<{
         name: string;
-        status: import("../shared/consts/task-status").StatusType;
         _id: Types.ObjectId;
+        status: import("../shared/consts/task-status").StatusType;
         createdAt?: Date;
         updatedAt?: Date;
         id: string;

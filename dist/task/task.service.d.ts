@@ -33,24 +33,24 @@ export declare class TaskService {
     constructor(taskModel: ModelType<TaskModel>);
     create(dto: CreateTaskDto): Promise<{
         name: string;
-        status: import("../shared/consts/task-status").StatusType;
         _id: import("mongoose").Types.ObjectId;
+        status: import("../shared/consts/task-status").StatusType;
         createdAt?: Date;
         updatedAt?: Date;
         id: string;
     }>;
     delete(dto: DeleteTaskDto): Promise<{
         name: string;
-        status: import("../shared/consts/task-status").StatusType;
         _id: import("mongoose").Types.ObjectId;
+        status: import("../shared/consts/task-status").StatusType;
         createdAt?: Date;
         updatedAt?: Date;
         id: string;
     }>;
     update(dto: UpdateTaskDto): Promise<{
         name: string;
-        status: import("../shared/consts/task-status").StatusType;
         _id: import("mongoose").Types.ObjectId;
+        status: import("../shared/consts/task-status").StatusType;
         createdAt?: Date;
         updatedAt?: Date;
         id: string;

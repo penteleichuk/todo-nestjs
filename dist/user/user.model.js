@@ -21,10 +21,6 @@ __decorate([
 __decorate([
     (0, typegoose_1.prop)({ default: false, type: Boolean }),
     __metadata("design:type", Boolean)
-], UserModel.prototype, "isAdmin", void 0);
-__decorate([
-    (0, typegoose_1.prop)({ default: false, type: Boolean }),
-    __metadata("design:type", Boolean)
 ], UserModel.prototype, "isBanned", void 0);
 __decorate([
     (0, typegoose_1.prop)({ type: String }),
