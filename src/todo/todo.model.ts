@@ -1,5 +1,7 @@
+import { ApiProperty } from '@nestjs/swagger'
 import { modelOptions, prop, Ref } from '@typegoose/typegoose'
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses'
+import { Types } from 'mongoose'
 import { TaskModel } from './../task/task.model'
 import { UserModel } from './../user/user.model'
 
@@ -18,9 +20,33 @@ export interface TodoModel extends Base {}
 	},
 })
 export class TodoModel extends TimeStamps {
+	@ApiProperty({
+		example: '65f73d3ec53f4aa7e8939696',
+		description: 'Unique identifier for the Task',
+	})
+	_id: Types.ObjectId
+
+	@ApiProperty({
+		example: 'My Todo',
+		description: 'Name of the Todo',
+	})
 	@prop({ required: true })
 	name: string
 
+	@ApiProperty({
+		example: 1,
+		description: 'Order of the Todo in the list',
+	})
+	@prop({ required: true, type: Number })
+	order: number
+
+	@prop({ required: true, ref: () => UserModel })
+	author: Ref<UserModel>
+
+	@ApiProperty({
+		description: 'List of tasks associated with the Todo',
+		type: () => [TaskModel],
+	})
 	@prop({
 		ref: () => TaskModel,
 		foreignField: 'todo',
@@ -29,9 +55,15 @@ export class TodoModel extends TimeStamps {
 	})
 	tasks: Ref<TaskModel>[]
 
-	@prop({ required: true, type: Number })
-	order: number
+	@ApiProperty({
+		description: 'Timestamp of when the task was created',
+		type: Date,
+	})
+	createdAt: Date
 
-	@prop({ required: true, ref: () => UserModel })
-	author: Ref<UserModel>
+	@ApiProperty({
+		description: 'Timestamp of the last update to the task',
+		type: Date,
+	})
+	updatedAt: Date
 }

@@ -10,7 +10,7 @@ export class DeleteTaskDto {
 		example: '507f1f77bcf86cd799439011',
 		type: 'string',
 	})
-	taskId: Types.ObjectId
+	taskId: string
 
 	@IsNotEmpty()
 	@IsMongoId({ message: 'Author must be a valid MongoDB ObjectId' })

@@ -35,7 +35,7 @@ __decorate([
         example: '507f191e810c19729de860ea',
         type: 'string',
     }),
-    __metadata("design:type", mongoose_1.Types.ObjectId)
+    __metadata("design:type", String)
 ], CreateTaskDto.prototype, "todoId", void 0);
 __decorate([
     (0, class_validator_1.IsEnum)(task_status_1.StatusType),

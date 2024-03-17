@@ -88,8 +88,7 @@ __decorate([
     (0, common_1.Post)('/swap-orders'),
     (0, swagger_1.ApiBody)({ type: swap_order_task_dto_1.SwapOrderTaskDto }),
     (0, swagger_1.ApiCreatedResponse)({
-        status: 200,
-        description: 'Returns an array of two TaskModel objects representing swapped tasks.',
+        description: 'Returns an array of two task objects representing swapped tasks.',
         type: task_model_1.TaskModel,
         isArray: true,
     }),

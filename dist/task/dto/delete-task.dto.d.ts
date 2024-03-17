@@ -1,5 +1,5 @@
 import { Types } from 'mongoose';
 export declare class DeleteTaskDto {
-    taskId: Types.ObjectId;
+    taskId: string;
     author: Types.ObjectId;
 }

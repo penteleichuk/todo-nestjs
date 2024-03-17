@@ -23,7 +23,7 @@ __decorate([
         example: '507f1f77bcf86cd799439011',
         type: 'string',
     }),
-    __metadata("design:type", mongoose_1.Types.ObjectId)
+    __metadata("design:type", String)
 ], DeleteTaskDto.prototype, "taskId", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),

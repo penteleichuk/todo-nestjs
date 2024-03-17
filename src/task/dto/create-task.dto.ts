@@ -28,7 +28,7 @@ export class CreateTaskDto {
 		example: '507f191e810c19729de860ea',
 		type: 'string',
 	})
-	todoId: Types.ObjectId
+	todoId: string
 
 	@IsEnum(StatusType)
 	@IsOptional()

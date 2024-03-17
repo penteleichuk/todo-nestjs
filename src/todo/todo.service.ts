@@ -31,12 +31,13 @@ export class TodoService {
 			select: '-author',
 		})
 
-		return newTodo.save()
+		const { author, ...res } = (await newTodo.save()).toJSON()
+		return res
 	}
 
 	async getAll(_id: Types.ObjectId) {
 		const todo = await this.todoModel
-			.find({ author: _id })
+			.find({ author: _id }, '-author')
 			.sort({ order: 1, createdAt: -1 })
 			.populate({
 				path: 'tasks',
@@ -65,7 +66,8 @@ export class TodoService {
 			{ $inc: { order: -1 } }
 		)
 
-		return todoToDelete
+		const { author, ...res } = todoToDelete.toJSON()
+		return res
 	}
 
 	async update(dto: UpdateTodoDto) {
@@ -84,7 +86,8 @@ export class TodoService {
 			throw new NotFoundException(`Todo not found`)
 		}
 
-		return todoToUpdate
+		const { author, ...res } = todoToUpdate.toJSON()
+		return res
 	}
 
 	async swapTodoOrders(dto: SwapOrderTodoDto) {
@@ -110,9 +113,12 @@ export class TodoService {
 		firstTodo.order = secondTodo.order
 		secondTodo.order = tempOrder
 
-		await firstTodo.save()
-		await secondTodo.save()
+		const responseFirst = await firstTodo.save()
+		const responseSecond = await secondTodo.save()
 
-		return [secondTodo, firstTodo]
+		const { author: _first, ...resFirst } = responseFirst.toJSON()
+		const { author: _second, ...resSecond } = responseSecond.toJSON()
+
+		return [resFirst, resSecond]
 	}
 }

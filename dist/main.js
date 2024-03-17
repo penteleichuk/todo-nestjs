@@ -18,7 +18,11 @@ async function bootstrap() {
         .addTag('todo')
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
-    swagger_1.SwaggerModule.setup('api', app, document);
+    swagger_1.SwaggerModule.setup('api', app, document, {
+        swaggerOptions: {
+            defaultModelsExpandDepth: -1,
+        },
+    });
     if (configService.get('NODE_ENV') === 'development') {
         await app.listen(4221);
     }

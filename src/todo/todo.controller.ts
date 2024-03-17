@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Patch, Post } from '@nestjs/common'
-import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger'
+import { ApiBody, ApiCreatedResponse, ApiTags } from '@nestjs/swagger'
 import { Types } from 'mongoose'
 import { Auth } from './../auth/decorators/auth.decorator'
 import { User } from './../user/decorators/user.decorator'
@@ -7,6 +7,7 @@ import { CreateTodoDto } from './dto/create-todo.dto'
 import { DeleteTodoDto } from './dto/delete-todo.dto'
 import { SwapOrderTodoDto } from './dto/swap-order-todo.dto'
 import { UpdateTodoDto } from './dto/update-todo.dto'
+import { TodoModel } from './todo.model'
 import { TodoService } from './todo.service'
 
 @ApiTags('todo')
@@ -17,9 +18,9 @@ export class TodoController {
 	@Auth()
 	@Post()
 	@ApiBody({ type: CreateTodoDto })
-	@ApiResponse({
-		status: 200,
-		description: 'Create todo user',
+	@ApiCreatedResponse({
+		description: 'Created todo object as response.',
+		type: TodoModel,
 	})
 	async create(
 		@User('_id') author: Types.ObjectId,
@@ -30,9 +31,10 @@ export class TodoController {
 
 	@Auth()
 	@Get()
-	@ApiResponse({
-		status: 200,
-		description: 'Get todo user',
+	@ApiCreatedResponse({
+		description: 'Get all todo object as response.',
+		type: TodoModel,
+		isArray: true,
 	})
 	async getAll(@User('_id') _id: Types.ObjectId) {
 		return this.todoService.getAll(_id)
@@ -41,14 +43,9 @@ export class TodoController {
 	@Auth()
 	@Delete()
 	@ApiBody({ type: DeleteTodoDto })
-	@ApiResponse({
-		status: 200,
-		description: 'Delete todo user',
-		type: DeleteTodoDto,
-	})
-	@ApiResponse({
-		status: 404,
-		description: 'Not found',
+	@ApiCreatedResponse({
+		description: 'Deleted todo object as response.',
+		type: TodoModel,
 	})
 	async delete(
 		@User('_id') author: Types.ObjectId,
@@ -60,10 +57,9 @@ export class TodoController {
 	@Auth()
 	@Patch()
 	@ApiBody({ type: UpdateTodoDto })
-	@ApiResponse({
-		status: 200,
-		description: 'Update todo user',
-		type: UpdateTodoDto,
+	@ApiCreatedResponse({
+		description: 'Updating todo object as response.',
+		type: TodoModel,
 	})
 	async update(
 		@User('_id') author: Types.ObjectId,
@@ -75,10 +71,12 @@ export class TodoController {
 	@Auth()
 	@Post('/swap-orders')
 	@ApiBody({ type: SwapOrderTodoDto })
-	@ApiResponse({
+	@ApiCreatedResponse({
 		status: 200,
-		description: 'Swap todo orders',
-		type: SwapOrderTodoDto,
+		description:
+			'Returns an array of two todo objects representing swapped tasks.',
+		type: TodoModel,
+		isArray: true,
 	})
 	async swapTodoOrders(
 		@User('_id') author: Types.ObjectId,

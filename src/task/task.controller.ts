@@ -61,9 +61,8 @@ export class TaskController {
 	@Post('/swap-orders')
 	@ApiBody({ type: SwapOrderTaskDto })
 	@ApiCreatedResponse({
-		status: 200,
 		description:
-			'Returns an array of two TaskModel objects representing swapped tasks.',
+			'Returns an array of two task objects representing swapped tasks.',
 		type: TaskModel,
 		isArray: true,
 	})

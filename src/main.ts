@@ -20,7 +20,11 @@ async function bootstrap() {
 		.build()
 	const document = SwaggerModule.createDocument(app, config)
 
-	SwaggerModule.setup('api', app, document)
+	SwaggerModule.setup('api', app, document, {
+		swaggerOptions: {
+			defaultModelsExpandDepth: -1, // Скрывает раздел Schemas
+		},
+	})
 
 	if (configService.get('NODE_ENV') === 'development') {
 		await app.listen(4221)
