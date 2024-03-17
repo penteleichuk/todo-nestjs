@@ -41,7 +41,7 @@ let ForgotService = class ForgotService {
             timestamps: true,
         });
         if (!user) {
-            throw new common_1.BadRequestException('An error occurred.');
+            throw new common_1.BadRequestException('Invalid user');
         }
         this.mailService.sendUserForgot({ email: user.email, name: user.name }, forgotToken);
     }

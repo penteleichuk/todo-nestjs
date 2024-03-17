@@ -41,7 +41,7 @@ export class ForgotService {
 		)
 
 		if (!user) {
-			throw new BadRequestException('An error occurred.')
+			throw new BadRequestException('Invalid user')
 		}
 
 		this.mailService.sendUserForgot(

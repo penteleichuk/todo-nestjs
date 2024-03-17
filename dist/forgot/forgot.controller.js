@@ -32,6 +32,8 @@ let ForgotController = class ForgotController {
 __decorate([
     (0, common_1.Post)('token'),
     (0, common_1.HttpCode)(200),
+    (0, swagger_1.ApiBody)({ type: get_token_forgot_dto_1.GetTokenForgotDto }),
+    (0, swagger_1.ApiBadRequestResponse)({ description: 'Invalid user' }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [get_token_forgot_dto_1.GetTokenForgotDto]),
@@ -40,6 +42,8 @@ __decorate([
 __decorate([
     (0, common_1.Post)('accept'),
     (0, common_1.HttpCode)(200),
+    (0, swagger_1.ApiBody)({ type: accept_forgot_dto_1.AcceptForgotDto }),
+    (0, swagger_1.ApiBadRequestResponse)({ description: 'The token is incorrect' }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [accept_forgot_dto_1.AcceptForgotDto]),
