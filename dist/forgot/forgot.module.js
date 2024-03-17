@@ -8,11 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ForgotModule = void 0;
 const common_1 = require("@nestjs/common");
-const nestjs_typegoose_1 = require("nestjs-typegoose");
 const config_1 = require("@nestjs/config");
+const nestjs_typegoose_1 = require("nestjs-typegoose");
+const user_model_1 = require("./../user/user.model");
 const forgot_controller_1 = require("./forgot.controller");
 const forgot_service_1 = require("./forgot.service");
-const user_model_1 = require("../user/user.model");
 let ForgotModule = class ForgotModule {
 };
 ForgotModule = __decorate([

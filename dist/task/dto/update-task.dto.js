@@ -13,7 +13,7 @@ exports.UpdateTaskDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const mongoose_1 = require("mongoose");
-const task_status_1 = require("../../shared/consts/task-status");
+const task_status_1 = require("./../../shared/consts/task-status");
 class UpdateTaskDto {
 }
 __decorate([

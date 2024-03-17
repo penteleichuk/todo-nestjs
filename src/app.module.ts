@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypegooseModule } from 'nestjs-typegoose'
-import { AccountActivationModule } from './account-activation/account-activation.module'
 import { AdminModule } from './admin/admin.module'
 import { AuthModule } from './auth/auth.module'
 import { ForgotModule } from './forgot/forgot.module'
+import { MailActivationModule } from './mail-activation/mail-activation.module'
 import { MailModule } from './mail/mail.module'
 import { getMongoDbConfig } from './shared/config/mongo.config'
 import { TaskModule } from './task/task.module'
@@ -24,7 +24,7 @@ import { UserModule } from './user/user.module'
 		MailModule,
 		AdminModule,
 		ForgotModule,
-		AccountActivationModule,
+		MailActivationModule,
 		TodoModule,
 		TaskModule,
 	],

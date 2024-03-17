@@ -8,7 +8,7 @@ import {
 	MaxLength,
 } from 'class-validator'
 import { Types } from 'mongoose'
-import { StatusType } from '../../shared/consts/task-status'
+import { StatusType } from './../../shared/consts/task-status'
 
 export class CreateTaskDto {
 	@IsNotEmpty()

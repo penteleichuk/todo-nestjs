@@ -3,13 +3,13 @@ import { ConfigService } from '@nestjs/config'
 import { ModelType } from '@typegoose/typegoose/lib/types'
 import { Types } from 'mongoose'
 import { InjectModel } from 'nestjs-typegoose'
-import { MailService } from '../mail/mail.service'
-import { getRandom } from '../shared/utilits/getRandom'
-import { UserModel } from '../user/user.model'
-import { AccountActivationDto } from './dto/account-activation.dto'
+import { MailService } from './../mail/mail.service'
+import { getRandom } from './../shared/utilits/getRandom'
+import { UserModel } from './../user/user.model'
+import { MailActivationDto } from './dto/mail-activation.dto'
 
 @Injectable()
-export class AccountActivationService {
+export class MailActivationService {
 	constructor(
 		@InjectModel(UserModel) private readonly UserModel: ModelType<UserModel>,
 		private configService: ConfigService,
@@ -49,7 +49,7 @@ export class AccountActivationService {
 		)
 	}
 
-	async activationAccept(dto: AccountActivationDto) {
+	async activationAccept(dto: MailActivationDto) {
 		const user = await this.UserModel.findOneAndUpdate(
 			{
 				_id: dto.author,

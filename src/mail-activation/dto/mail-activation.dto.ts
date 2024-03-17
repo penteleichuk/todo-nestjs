@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { IsMongoId, IsNotEmpty, IsString } from 'class-validator'
 import { Types } from 'mongoose'
 
-export class AccountActivationDto {
+export class MailActivationDto {
 	@IsNotEmpty({ message: 'Email activation token must be provided' })
 	@IsString({ message: 'Email activation token must be a string' })
 	@ApiProperty({
