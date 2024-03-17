@@ -46,6 +46,13 @@ export class UserService {
 			user.password = await hash(dto.password, salt)
 		}
 
-		return await user.save({ timestamps: true })
+		const {
+			_id: userId,
+			name,
+			email,
+			updatedAt,
+		} = (await user.save({ timestamps: true })).toJSON()
+
+		return { _id: userId, name, email, updatedAt }
 	}
 }

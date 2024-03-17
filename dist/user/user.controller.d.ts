@@ -24,14 +24,18 @@
 /// <reference types="mongoose/types/inferschematype" />
 import { Types } from 'mongoose';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { UserModel } from './user.model';
 import { UserService } from './user.service';
 export declare class UserController {
     private readonly UserService;
     constructor(UserService: UserService);
-    getProfile(_id: Types.ObjectId): Promise<import("mongoose").Document<Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, import("./user.model").UserModel> & import("./user.model").UserModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{
+    getProfile(_id: Types.ObjectId): Promise<import("mongoose").Document<Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, UserModel> & UserModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{
         _id: Types.ObjectId;
     }>>;
-    changePassword(_id: Types.ObjectId, dto: ChangePasswordDto): Promise<import("mongoose").Document<Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, import("./user.model").UserModel> & import("./user.model").UserModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{
+    changePassword(_id: Types.ObjectId, dto: ChangePasswordDto): Promise<{
         _id: Types.ObjectId;
-    }>>;
+        name: string;
+        email: string;
+        updatedAt: Date;
+    }>;
 }

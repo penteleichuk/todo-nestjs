@@ -19,6 +19,7 @@ const mongoose_1 = require("mongoose");
 const auth_decorator_1 = require("./../auth/decorators/auth.decorator");
 const user_decorator_1 = require("./decorators/user.decorator");
 const change_password_dto_1 = require("./dto/change-password.dto");
+const user_model_1 = require("./user.model");
 const user_service_1 = require("./user.service");
 let UserController = class UserController {
     constructor(UserService) {
@@ -35,6 +36,10 @@ __decorate([
     (0, common_1.Get)('/'),
     (0, common_1.HttpCode)(200),
     (0, auth_decorator_1.Auth)(),
+    (0, swagger_1.ApiCreatedResponse)({
+        description: 'Response user object as response.',
+        type: user_model_1.UserModel,
+    }),
     __param(0, (0, user_decorator_1.User)('_id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [mongoose_1.Types.ObjectId]),
@@ -46,6 +51,10 @@ __decorate([
     (0, common_1.HttpCode)(200),
     (0, auth_decorator_1.Auth)(),
     (0, swagger_1.ApiBody)({ type: change_password_dto_1.ChangePasswordDto }),
+    (0, swagger_1.ApiCreatedResponse)({
+        description: 'Response change password user object as response.',
+        type: user_model_1.UserModel,
+    }),
     __param(0, (0, user_decorator_1.User)('_id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),

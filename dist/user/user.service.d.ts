@@ -32,7 +32,10 @@ export declare class UserService {
     getById(_id: Types.ObjectId): Promise<import("mongoose").Document<Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, UserModel> & UserModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{
         _id: Types.ObjectId;
     }>>;
-    changePassword(_id: Types.ObjectId, dto: ChangePasswordDto): Promise<import("mongoose").Document<Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, UserModel> & UserModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{
+    changePassword(_id: Types.ObjectId, dto: ChangePasswordDto): Promise<{
         _id: Types.ObjectId;
-    }>>;
+        name: string;
+        email: string;
+        updatedAt: Date;
+    }>;
 }

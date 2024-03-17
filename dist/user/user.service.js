@@ -48,7 +48,8 @@ let UserService = class UserService {
             const salt = await (0, bcryptjs_1.genSalt)(10);
             user.password = await (0, bcryptjs_1.hash)(dto.password, salt);
         }
-        return await user.save({ timestamps: true });
+        const { _id: userId, name, email, updatedAt, } = (await user.save({ timestamps: true })).toJSON();
+        return { _id: userId, name, email, updatedAt };
     }
 };
 UserService = __decorate([
