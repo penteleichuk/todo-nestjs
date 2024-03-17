@@ -20,6 +20,7 @@ const auth_decorator_1 = require("./../auth/decorators/auth.decorator");
 const user_decorator_1 = require("./../user/decorators/user.decorator");
 const create_task_dto_1 = require("./dto/create-task.dto");
 const delete_task_dto_1 = require("./dto/delete-task.dto");
+const swap_order_task_dto_1 = require("./dto/swap-order-task.dto");
 const update_task_dto_1 = require("./dto/update-task.dto");
 const task_service_1 = require("./task.service");
 let TaskController = class TaskController {
@@ -34,6 +35,9 @@ let TaskController = class TaskController {
     }
     async update(author, dto) {
         return this.taskService.update(Object.assign(Object.assign({}, dto), { author }));
+    }
+    async swapTodoOrders(author, dto) {
+        return this.taskService.swapTaskOrders(Object.assign(Object.assign({}, dto), { author }));
     }
 };
 __decorate([
@@ -62,7 +66,7 @@ __decorate([
     (0, swagger_1.ApiBody)({ type: update_task_dto_1.UpdateTaskDto }),
     (0, swagger_1.ApiResponse)({
         status: 200,
-        description: 'Update todo user',
+        description: 'Update task user',
         type: update_task_dto_1.UpdateTaskDto,
     }),
     __param(0, (0, user_decorator_1.User)('_id')),
@@ -71,6 +75,21 @@ __decorate([
     __metadata("design:paramtypes", [mongoose_1.Types.ObjectId, update_task_dto_1.UpdateTaskDto]),
     __metadata("design:returntype", Promise)
 ], TaskController.prototype, "update", null);
+__decorate([
+    (0, auth_decorator_1.Auth)(),
+    (0, common_1.Post)('/swap-orders'),
+    (0, swagger_1.ApiBody)({ type: swap_order_task_dto_1.SwapOrderTaskDto }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Swap task orders',
+        type: swap_order_task_dto_1.SwapOrderTaskDto,
+    }),
+    __param(0, (0, user_decorator_1.User)('_id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [mongoose_1.Types.ObjectId, swap_order_task_dto_1.SwapOrderTaskDto]),
+    __metadata("design:returntype", Promise)
+], TaskController.prototype, "swapTodoOrders", null);
 TaskController = __decorate([
     (0, swagger_1.ApiTags)('task'),
     (0, common_1.Controller)('task'),

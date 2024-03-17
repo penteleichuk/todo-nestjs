@@ -32,19 +32,28 @@ let TaskService = class TaskService {
         this.taskModel = taskModel;
     }
     async create(dto) {
-        const task = new this.taskModel(Object.assign(Object.assign({}, dto), { todo: dto.todoId }));
-        const _a = (await task.save()).toJSON(), { author, todo } = _a, res = __rest(_a, ["author", "todo"]);
+        const maxOrderTask = await this.taskModel
+            .findOne({ todo: dto.todoId, author: dto.author })
+            .sort({ order: -1 })
+            .exec();
+        const order = maxOrderTask ? maxOrderTask.order + 1 : 1;
+        const newTask = new this.taskModel(Object.assign(Object.assign({}, dto), { todo: dto.todoId, order }));
+        const _a = (await newTask.save()).toJSON(), { author, todo } = _a, res = __rest(_a, ["author", "todo"]);
         return res;
     }
     async delete(dto) {
-        const task = await this.taskModel.findOneAndDelete({
-            author: dto.author,
+        const taskToDelete = await this.taskModel.findOne({
             _id: dto.taskId,
+            author: dto.author,
         });
-        if (!task) {
-            throw new common_1.NotFoundException(`Task not found`);
+        if (!taskToDelete) {
+            throw new Error('Task not found');
         }
-        const _a = task.toJSON(), { author, todo } = _a, res = __rest(_a, ["author", "todo"]);
+        const deletedOrder = taskToDelete.order;
+        const todoId = taskToDelete.todo;
+        await taskToDelete.remove();
+        await this.taskModel.updateMany({ todo: todoId, order: { $gt: deletedOrder } }, { $inc: { order: -1 } });
+        const _a = taskToDelete.toJSON(), { author, todo } = _a, res = __rest(_a, ["author", "todo"]);
         return res;
     }
     async update(dto) {
@@ -55,6 +64,25 @@ let TaskService = class TaskService {
         }
         const _a = task.toJSON(), { author: dAuthor, todo: dTodo } = _a, res = __rest(_a, ["author", "todo"]);
         return res;
+    }
+    async swapTaskOrders(dto) {
+        const tasks = await this.taskModel.find({
+            _id: { $in: [dto.firstTaskId, dto.secondTaskId] },
+            author: dto.author,
+        });
+        if (tasks.length !== 2) {
+            throw new common_1.NotFoundException('One or both tasks not found or do not belong to the specified todo');
+        }
+        const [firstTask, secondTask] = tasks;
+        if (firstTask.todo.toString() !== secondTask.todo.toString()) {
+            throw new common_1.NotFoundException('Mismatched tasks');
+        }
+        const tempOrder = firstTask.order;
+        firstTask.order = secondTask.order;
+        secondTask.order = tempOrder;
+        await firstTask.save();
+        await secondTask.save();
+        return [secondTask, firstTask];
     }
 };
 TaskService = __decorate([

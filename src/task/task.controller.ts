@@ -5,6 +5,7 @@ import { Auth } from './../auth/decorators/auth.decorator'
 import { User } from './../user/decorators/user.decorator'
 import { CreateTaskDto } from './dto/create-task.dto'
 import { DeleteTaskDto } from './dto/delete-task.dto'
+import { SwapOrderTaskDto } from './dto/swap-order-task.dto'
 import { UpdateTaskDto } from './dto/update-task.dto'
 import { TaskService } from './task.service'
 
@@ -38,7 +39,7 @@ export class TaskController {
 	@ApiBody({ type: UpdateTaskDto })
 	@ApiResponse({
 		status: 200,
-		description: 'Update todo user',
+		description: 'Update task user',
 		type: UpdateTaskDto,
 	})
 	async update(
@@ -46,5 +47,20 @@ export class TaskController {
 		@Body() dto: UpdateTaskDto
 	) {
 		return this.taskService.update({ ...dto, author })
+	}
+
+	@Auth()
+	@Post('/swap-orders')
+	@ApiBody({ type: SwapOrderTaskDto })
+	@ApiResponse({
+		status: 200,
+		description: 'Swap task orders',
+		type: SwapOrderTaskDto,
+	})
+	async swapTodoOrders(
+		@User('_id') author: Types.ObjectId,
+		@Body() dto: SwapOrderTaskDto
+	) {
+		return this.taskService.swapTaskOrders({ ...dto, author })
 	}
 }

@@ -38,7 +38,11 @@ export class TodoService {
 		const todo = await this.todoModel
 			.find({ author: _id })
 			.sort({ order: 1, createdAt: -1 })
-			.populate({ path: 'tasks', select: '-author' })
+			.populate({
+				path: 'tasks',
+				select: '-author',
+				options: { sort: { order: 1 } },
+			})
 			.exec()
 
 		return todo

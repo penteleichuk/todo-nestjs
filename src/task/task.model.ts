@@ -17,6 +17,9 @@ export class TaskModel extends TimeStamps {
 	@prop({ required: true, ref: () => UserModel })
 	author: Ref<UserModel>
 
+	@prop({ required: true, type: Number })
+	order: number
+
 	@prop({ required: true, ref: () => TodoModel })
 	todo: Ref<TodoModel>
 }

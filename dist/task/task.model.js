@@ -30,6 +30,10 @@ __decorate([
     __metadata("design:type", Object)
 ], TaskModel.prototype, "author", void 0);
 __decorate([
+    (0, typegoose_1.prop)({ required: true, type: Number }),
+    __metadata("design:type", Number)
+], TaskModel.prototype, "order", void 0);
+__decorate([
     (0, typegoose_1.prop)({ required: true, ref: () => todo_model_1.TodoModel }),
     __metadata("design:type", Object)
 ], TaskModel.prototype, "todo", void 0);

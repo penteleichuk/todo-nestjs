@@ -9,5 +9,6 @@ export declare class TaskModel extends TimeStamps {
     name: string;
     status: StatusType;
     author: Ref<UserModel>;
+    order: number;
     todo: Ref<TodoModel>;
 }
