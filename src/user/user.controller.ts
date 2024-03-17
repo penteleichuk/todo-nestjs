@@ -15,7 +15,7 @@ import { ChangePasswordDto } from './dto/change-password.dto'
 import { UserModel } from './user.model'
 import { UserService } from './user.service'
 
-@ApiTags('user')
+@ApiTags('User')
 @Controller('user')
 export class UserController {
 	constructor(private readonly UserService: UserService) {}

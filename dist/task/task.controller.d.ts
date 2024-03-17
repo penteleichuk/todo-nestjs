@@ -36,28 +36,28 @@ export declare class TaskController {
         _id: Types.ObjectId;
         name: string;
         updatedAt: Date;
-        id: string;
         createdAt: Date;
-        order: number;
+        id: string;
         status: import("../shared/consts/task-status").StatusType;
+        order: number;
     }>;
     delete(author: Types.ObjectId, dto: DeleteTaskDto): Promise<{
         _id: Types.ObjectId;
         name: string;
         updatedAt: Date;
-        id: string;
         createdAt: Date;
-        order: number;
+        id: string;
         status: import("../shared/consts/task-status").StatusType;
+        order: number;
     }>;
     update(author: Types.ObjectId, dto: UpdateTaskDto): Promise<{
         _id: Types.ObjectId;
         name: string;
         updatedAt: Date;
-        id: string;
         createdAt: Date;
-        order: number;
+        id: string;
         status: import("../shared/consts/task-status").StatusType;
+        order: number;
     }>;
     swapTodoOrders(author: Types.ObjectId, dto: SwapOrderTaskDto): Promise<(import("mongoose").Document<Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, TaskModel> & TaskModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{
         _id: Types.ObjectId;

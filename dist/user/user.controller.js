@@ -62,7 +62,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "changePassword", null);
 UserController = __decorate([
-    (0, swagger_1.ApiTags)('user'),
+    (0, swagger_1.ApiTags)('User'),
     (0, common_1.Controller)('user'),
     __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserController);

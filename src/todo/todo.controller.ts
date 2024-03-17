@@ -10,7 +10,7 @@ import { UpdateTodoDto } from './dto/update-todo.dto'
 import { TodoModel } from './todo.model'
 import { TodoService } from './todo.service'
 
-@ApiTags('todo')
+@ApiTags('Todo')
 @Controller('todo')
 export class TodoController {
 	constructor(private readonly todoService: TodoService) {}

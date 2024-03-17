@@ -99,7 +99,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], TaskController.prototype, "swapTodoOrders", null);
 TaskController = __decorate([
-    (0, swagger_1.ApiTags)('task'),
+    (0, swagger_1.ApiTags)('Task'),
     (0, common_1.Controller)('task'),
     __metadata("design:paramtypes", [task_service_1.TaskService])
 ], TaskController);

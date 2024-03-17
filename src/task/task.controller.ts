@@ -10,7 +10,7 @@ import { UpdateTaskDto } from './dto/update-task.dto'
 import { TaskModel } from './task.model'
 import { TaskService } from './task.service'
 
-@ApiTags('task')
+@ApiTags('Task')
 @Controller('task')
 export class TaskController {
 	constructor(private readonly taskService: TaskService) {}

@@ -13,10 +13,14 @@ async function bootstrap() {
 	app.use(requestIp.mw())
 
 	const config = new DocumentBuilder()
-		.setTitle('Todo doc')
+		.setTitle('Todo documentation')
 		.setDescription('The todo API description')
 		.setVersion('1.0')
-		.addTag('todo')
+		.addTag('Todo')
+		.addTag('Task')
+		.addTag('Auth')
+		.addTag('User')
+		.addTag('Email activation')
 		.build()
 	const document = SwaggerModule.createDocument(app, config)
 

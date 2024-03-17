@@ -12,10 +12,14 @@ async function bootstrap() {
     app.setGlobalPrefix('api');
     app.use(requestIp.mw());
     const config = new swagger_1.DocumentBuilder()
-        .setTitle('Todo doc')
+        .setTitle('Todo documentation')
         .setDescription('The todo API description')
         .setVersion('1.0')
-        .addTag('todo')
+        .addTag('Todo')
+        .addTag('Task')
+        .addTag('Auth')
+        .addTag('User')
+        .addTag('Email activation')
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('api', app, document, {

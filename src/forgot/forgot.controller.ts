@@ -4,7 +4,7 @@ import { AcceptForgotDto } from './dto/accept-forgot.dto'
 import { GetTokenForgotDto } from './dto/get-token-forgot.dto'
 import { ForgotService } from './forgot.service'
 
-@ApiTags('forgot password')
+@ApiTags('Forgot password')
 @Controller('forgot')
 export class ForgotController {
 	constructor(private readonly ForgotService: ForgotService) {}

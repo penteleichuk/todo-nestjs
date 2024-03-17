@@ -13,7 +13,7 @@ import { LoginDto } from './dto/login.dto'
 import { RefreshTokenDto } from './dto/refreshToken.dto'
 import { RegistrationDto } from './dto/registration.dto'
 
-@ApiTags('auth')
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
 	constructor(private readonly AuthService: AuthService) {}
