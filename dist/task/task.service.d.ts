@@ -37,28 +37,28 @@ export declare class TaskService {
     create(dto: CreateTaskDto): Promise<{
         _id: import("mongoose").Types.ObjectId;
         name: string;
-        order: number;
-        createdAt: Date;
         updatedAt: Date;
         id: string;
+        createdAt: Date;
+        order: number;
         status: import("../shared/consts/task-status").StatusType;
     }>;
     delete(dto: DeleteTaskDto): Promise<{
         _id: import("mongoose").Types.ObjectId;
         name: string;
-        order: number;
-        createdAt: Date;
         updatedAt: Date;
         id: string;
+        createdAt: Date;
+        order: number;
         status: import("../shared/consts/task-status").StatusType;
     }>;
     update(dto: UpdateTaskDto): Promise<{
         _id: import("mongoose").Types.ObjectId;
         name: string;
-        order: number;
-        createdAt: Date;
         updatedAt: Date;
         id: string;
+        createdAt: Date;
+        order: number;
         status: import("../shared/consts/task-status").StatusType;
     }>;
     swapTaskOrders(dto: SwapOrderTaskDto): Promise<(import("mongoose").Document<import("mongoose").Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, TaskModel> & TaskModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{

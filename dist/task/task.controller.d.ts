@@ -33,31 +33,31 @@ export declare class TaskController {
     private readonly taskService;
     constructor(taskService: TaskService);
     create(author: Types.ObjectId, dto: CreateTaskDto): Promise<{
-        name: string;
-        createdAt: Date;
-        updatedAt: Date;
         _id: Types.ObjectId;
+        name: string;
+        updatedAt: Date;
         id: string;
-        status: import("../shared/consts/task-status").StatusType;
+        createdAt: Date;
         order: number;
+        status: import("../shared/consts/task-status").StatusType;
     }>;
     delete(author: Types.ObjectId, dto: DeleteTaskDto): Promise<{
-        name: string;
-        createdAt: Date;
-        updatedAt: Date;
         _id: Types.ObjectId;
+        name: string;
+        updatedAt: Date;
         id: string;
-        status: import("../shared/consts/task-status").StatusType;
+        createdAt: Date;
         order: number;
+        status: import("../shared/consts/task-status").StatusType;
     }>;
     update(author: Types.ObjectId, dto: UpdateTaskDto): Promise<{
-        name: string;
-        createdAt: Date;
-        updatedAt: Date;
         _id: Types.ObjectId;
+        name: string;
+        updatedAt: Date;
         id: string;
-        status: import("../shared/consts/task-status").StatusType;
+        createdAt: Date;
         order: number;
+        status: import("../shared/consts/task-status").StatusType;
     }>;
     swapTodoOrders(author: Types.ObjectId, dto: SwapOrderTaskDto): Promise<(import("mongoose").Document<Types.ObjectId, import("@typegoose/typegoose/lib/types").BeAnObject, TaskModel> & TaskModel & import("@typegoose/typegoose/lib/types").IObjectWithTypegooseFunction & Required<{
         _id: Types.ObjectId;

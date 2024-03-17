@@ -10,23 +10,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserModel = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const typegoose_1 = require("@typegoose/typegoose");
 const defaultClasses_1 = require("@typegoose/typegoose/lib/defaultClasses");
+const mongoose_1 = require("mongoose");
 let UserModel = class UserModel extends defaultClasses_1.TimeStamps {
 };
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '65f73d3ec53f4aa7e8939696',
+        description: 'Unique identifier for the User',
+    }),
+    __metadata("design:type", mongoose_1.Types.ObjectId)
+], UserModel.prototype, "_id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 'Vasyl',
+        description: 'Name of the User',
+    }),
     (0, typegoose_1.prop)({ default: '', type: String }),
     __metadata("design:type", String)
 ], UserModel.prototype, "name", void 0);
-__decorate([
-    (0, typegoose_1.prop)({ default: false, type: Boolean }),
-    __metadata("design:type", Boolean)
-], UserModel.prototype, "isBanned", void 0);
 __decorate([
     (0, typegoose_1.prop)({ type: String }),
     __metadata("design:type", String)
 ], UserModel.prototype, "password", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 'admin@gmail.com',
+        description: 'Email of the User',
+    }),
     (0, typegoose_1.prop)({ unique: true }),
     __metadata("design:type", String)
 ], UserModel.prototype, "email", void 0);
@@ -42,6 +55,13 @@ __decorate([
     (0, typegoose_1.prop)({ default: new Date() }),
     __metadata("design:type", Date)
 ], UserModel.prototype, "tokenUpdatedAt", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '2024-03-16T13:02:08.365Z',
+        description: 'Last update time of the User',
+    }),
+    __metadata("design:type", Date)
+], UserModel.prototype, "updatedAt", void 0);
 UserModel = __decorate([
     (0, typegoose_1.modelOptions)({ schemaOptions: { versionKey: false } })
 ], UserModel);

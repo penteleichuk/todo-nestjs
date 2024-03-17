@@ -1,12 +1,14 @@
 import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
+import { Types } from 'mongoose';
 export interface UserModel extends Base {
 }
 export declare class UserModel extends TimeStamps {
+    _id: Types.ObjectId;
     name: string;
-    isBanned: boolean;
     password: string;
     email: string;
     emailToken: string;
     forgotToken: string;
     tokenUpdatedAt: Date;
+    updatedAt: Date;
 }
