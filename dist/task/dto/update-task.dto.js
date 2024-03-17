@@ -41,7 +41,7 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'The status of the task',
         enum: task_status_1.StatusType,
-        example: task_status_1.StatusType.IN_PROGRESS,
+        example: task_status_1.StatusType.PENDING,
     }),
     __metadata("design:type", String)
 ], UpdateTaskDto.prototype, "status", void 0);

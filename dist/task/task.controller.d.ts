@@ -7,27 +7,27 @@ export declare class TaskController {
     private readonly taskService;
     constructor(taskService: TaskService);
     create(author: Types.ObjectId, dto: CreateTaskDto): Promise<{
-        _id: Types.ObjectId;
-        id: string;
         name: string;
         status: import("../shared/consts/task-status").StatusType;
+        _id: Types.ObjectId;
         createdAt?: Date;
         updatedAt?: Date;
+        id: string;
     }>;
     delete(author: Types.ObjectId, dto: DeleteTaskDto): Promise<{
-        _id: Types.ObjectId;
-        id: string;
         name: string;
         status: import("../shared/consts/task-status").StatusType;
+        _id: Types.ObjectId;
         createdAt?: Date;
         updatedAt?: Date;
+        id: string;
     }>;
     update(author: Types.ObjectId, dto: UpdateTaskDto): Promise<{
-        _id: Types.ObjectId;
-        id: string;
         name: string;
         status: import("../shared/consts/task-status").StatusType;
+        _id: Types.ObjectId;
         createdAt?: Date;
         updatedAt?: Date;
+        id: string;
     }>;
 }

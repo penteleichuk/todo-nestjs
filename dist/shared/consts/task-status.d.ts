@@ -1,5 +1,5 @@
 export declare enum StatusType {
     IN_PROGRESS = "in_progress",
-    SUCCESS = "success",
+    PENDING = "pending",
     DONE = "done"
 }

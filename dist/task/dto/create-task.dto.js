@@ -43,7 +43,7 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'The status of the todo',
         enum: task_status_1.StatusType,
-        example: task_status_1.StatusType.IN_PROGRESS,
+        example: task_status_1.StatusType.PENDING,
     }),
     __metadata("design:type", String)
 ], CreateTaskDto.prototype, "status", void 0);
