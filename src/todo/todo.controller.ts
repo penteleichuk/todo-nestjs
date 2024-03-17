@@ -7,7 +7,6 @@ import { CreateTodoDto } from './dto/create-todo.dto'
 import { DeleteTodoDto } from './dto/delete-todo.dto'
 import { UpdateTodoDto } from './dto/update-todo.dto'
 import { TodoService } from './todo.service'
-import { TodoType } from './types/todo.type'
 
 @ApiTags('todo')
 @Controller('todo')
@@ -20,7 +19,6 @@ export class TodoController {
 	@ApiResponse({
 		status: 200,
 		description: 'Create todo user',
-		type: Promise<TodoType>,
 	})
 	async create(
 		@User('_id') author: Types.ObjectId,
@@ -34,9 +32,8 @@ export class TodoController {
 	@ApiResponse({
 		status: 200,
 		description: 'Get todo user',
-		type: Promise<TodoType[]>,
 	})
-	async getAll(@User('_id') _id: Types.ObjectId): Promise<TodoType[]> {
+	async getAll(@User('_id') _id: Types.ObjectId) {
 		return this.todoService.getAll(_id)
 	}
 
@@ -46,12 +43,11 @@ export class TodoController {
 	@ApiResponse({
 		status: 200,
 		description: 'Delete todo user',
-		type: Promise<DeleteTodoDto>,
+		type: DeleteTodoDto,
 	})
 	@ApiResponse({
 		status: 404,
 		description: 'Not found',
-		type: Promise<DeleteTodoDto>,
 	})
 	async delete(
 		@User('_id') author: Types.ObjectId,
@@ -66,7 +62,7 @@ export class TodoController {
 	@ApiResponse({
 		status: 200,
 		description: 'Update todo user',
-		type: Promise<UpdateTodoDto>,
+		type: UpdateTodoDto,
 	})
 	async update(
 		@User('_id') author: Types.ObjectId,

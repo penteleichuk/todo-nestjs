@@ -26,7 +26,7 @@ export class UpdateTaskDto {
 		description: 'The MongoDB ObjectId of the task this task belongs to',
 		example: '507f191e810c19729de860ea',
 	})
-	taskId: Types.ObjectId
+	taskId: string
 
 	@IsOptional()
 	@ApiPropertyOptional({

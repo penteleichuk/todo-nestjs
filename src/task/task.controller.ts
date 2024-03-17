@@ -39,7 +39,7 @@ export class TaskController {
 	@ApiResponse({
 		status: 200,
 		description: 'Update todo user',
-		type: Promise<UpdateTaskDto>,
+		type: UpdateTaskDto,
 	})
 	async update(
 		@User('_id') author: Types.ObjectId,

@@ -63,7 +63,7 @@ __decorate([
     (0, swagger_1.ApiResponse)({
         status: 200,
         description: 'Update todo user',
-        type: (Promise),
+        type: update_task_dto_1.UpdateTaskDto,
     }),
     __param(0, (0, user_decorator_1.User)('_id')),
     __param(1, (0, common_1.Body)()),

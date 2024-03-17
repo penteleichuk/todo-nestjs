@@ -10,7 +10,7 @@ export class DeleteTodoDto {
 		example: '507f1f77bcf86cd799439011',
 		type: 'string',
 	})
-	todoId: Types.ObjectId
+	todoId: string
 
 	@IsNotEmpty()
 	@IsMongoId({ message: 'Author must be a valid MongoDB ObjectId' })

@@ -23,5 +23,5 @@ export class UpdateTodoDto {
 		description: 'The MongoDB ObjectId of the todo',
 		example: '507f1f77bcf86cd799439011',
 	})
-	todoId: Types.ObjectId
+	todoId: string
 }

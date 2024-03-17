@@ -23,7 +23,7 @@ export class TodoService {
 		return todo.save()
 	}
 
-	async getAll(_id: Types.ObjectId): Promise<any> {
+	async getAll(_id: Types.ObjectId) {
 		const todo = await this.todoModel
 			.find({ author: _id })
 			.sort({ createdAt: -1 })

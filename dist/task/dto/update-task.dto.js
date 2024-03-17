@@ -34,7 +34,7 @@ __decorate([
         description: 'The MongoDB ObjectId of the task this task belongs to',
         example: '507f191e810c19729de860ea',
     }),
-    __metadata("design:type", mongoose_1.Types.ObjectId)
+    __metadata("design:type", String)
 ], UpdateTaskDto.prototype, "taskId", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
