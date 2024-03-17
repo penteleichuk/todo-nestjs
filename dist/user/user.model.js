@@ -12,8 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserModel = void 0;
 const typegoose_1 = require("@typegoose/typegoose");
 const defaultClasses_1 = require("@typegoose/typegoose/lib/defaultClasses");
-class UserModel extends defaultClasses_1.TimeStamps {
-}
+let UserModel = class UserModel extends defaultClasses_1.TimeStamps {
+};
 __decorate([
     (0, typegoose_1.prop)({ default: '', type: String }),
     __metadata("design:type", String)
@@ -46,5 +46,8 @@ __decorate([
     (0, typegoose_1.prop)({ default: new Date() }),
     __metadata("design:type", Date)
 ], UserModel.prototype, "tokenUpdatedAt", void 0);
+UserModel = __decorate([
+    (0, typegoose_1.modelOptions)({ schemaOptions: { versionKey: false } })
+], UserModel);
 exports.UserModel = UserModel;
 //# sourceMappingURL=user.model.js.map

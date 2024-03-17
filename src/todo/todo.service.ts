@@ -15,11 +15,10 @@ export class TodoService {
 	) {}
 
 	async create(dto: CreateTodoDto) {
-		const todo = await new this.todoModel(dto).populate([
-			{ path: 'author', select: '_id name isAdmin isBanned' },
-			{ path: 'tasks' },
-		])
-
+		const todo = await new this.todoModel(dto).populate({
+			path: 'tasks',
+			select: '-author',
+		})
 		return todo.save()
 	}
 
@@ -27,31 +26,29 @@ export class TodoService {
 		const todo = await this.todoModel
 			.find({ author: _id })
 			.sort({ createdAt: -1 })
-			.populate([
-				{ path: 'author', select: '_id name isAdmin isBanned' },
-				{ path: 'tasks' },
-			])
-			.lean()
+			.populate({ path: 'tasks', select: '-author' })
 			.exec()
 
 		return todo
 	}
 
 	async delete(dto: DeleteTodoDto) {
-		const response = await this.todoModel.findOneAndDelete({
-			author: dto.author,
-			_id: dto.todoId,
-		})
+		const todo = await this.todoModel
+			.findOneAndDelete({
+				author: dto.author,
+				_id: dto.todoId,
+			})
+			.select('-author')
 
-		if (!response) {
+		if (!todo) {
 			throw new NotFoundException(`Todo not found`)
 		}
 
-		return response
+		return todo
 	}
 
 	async update(dto: UpdateTodoDto) {
-		const response = await this.todoModel
+		const todo = await this.todoModel
 			.findOneAndUpdate(
 				{
 					author: dto.author,
@@ -60,12 +57,12 @@ export class TodoService {
 				{ name: dto.name },
 				{ new: true }
 			)
-			.populate([{ path: 'author', select: '_id name isAdmin isBanned' }])
+			.select('-author')
 
-		if (!response) {
+		if (!todo) {
 			throw new NotFoundException(`Todo not found`)
 		}
 
-		return response
+		return todo
 	}
 }

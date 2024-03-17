@@ -32,46 +32,29 @@ let TaskService = class TaskService {
         this.taskModel = taskModel;
     }
     async create(dto) {
-        const task = await new this.taskModel(Object.assign(Object.assign({}, dto), { todo: dto.todoId })).populate([
-            {
-                path: 'todo',
-                select: 'name',
-            },
-            {
-                path: 'author',
-                select: 'name',
-            },
-        ]);
-        return task.save();
+        const task = new this.taskModel(Object.assign(Object.assign({}, dto), { todo: dto.todoId }));
+        const _a = (await task.save()).toJSON(), { author, todo } = _a, res = __rest(_a, ["author", "todo"]);
+        return res;
     }
     async delete(dto) {
-        const response = await this.taskModel.findOneAndDelete({
+        const task = await this.taskModel.findOneAndDelete({
             author: dto.author,
             _id: dto.taskId,
         });
-        if (!response) {
+        if (!task) {
             throw new common_1.NotFoundException(`Task not found`);
         }
-        return response;
+        const _a = task.toJSON(), { author, todo } = _a, res = __rest(_a, ["author", "todo"]);
+        return res;
     }
     async update(dto) {
         const { author, taskId: _id } = dto, rest = __rest(dto, ["author", "taskId"]);
-        const response = await this.taskModel
-            .findOneAndUpdate({ author, _id }, Object.assign({}, rest), { new: true })
-            .populate([
-            {
-                path: 'todo',
-                select: 'name',
-            },
-            {
-                path: 'author',
-                select: 'name',
-            },
-        ]);
-        if (!response) {
+        const task = await this.taskModel.findOneAndUpdate({ author, _id }, Object.assign({}, rest), { new: true });
+        if (!task) {
             throw new common_1.NotFoundException(`Task not found`);
         }
-        return response;
+        const _a = task.toJSON(), { author: dAuthor, todo: dTodo } = _a, res = __rest(_a, ["author", "todo"]);
+        return res;
     }
 };
 TaskService = __decorate([

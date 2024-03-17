@@ -8,8 +8,13 @@ export interface TodoModel extends Base {}
 @modelOptions({
 	schemaOptions: {
 		versionKey: false,
-		toObject: { virtuals: true },
-		toJSON: { virtuals: true },
+		toJSON: {
+			virtuals: true,
+			transform: (_, ret) => {
+				delete ret.id
+				return ret
+			},
+		},
 	},
 })
 export class TodoModel extends TimeStamps {

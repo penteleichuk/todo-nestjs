@@ -13,56 +13,46 @@ export class TaskService {
 	) {}
 
 	async create(dto: CreateTaskDto) {
-		const task = await new this.taskModel({
+		const task = new this.taskModel({
 			...dto,
 			todo: dto.todoId,
-		}).populate([
-			{
-				path: 'todo',
-				select: 'name',
-			},
-			{
-				path: 'author',
-				select: 'name',
-			},
-		])
+		})
 
-		return task.save()
+		const { author, todo, ...res } = (await task.save()).toJSON()
+
+		return res
 	}
 
 	async delete(dto: DeleteTaskDto) {
-		const response = await this.taskModel.findOneAndDelete({
+		const task = await this.taskModel.findOneAndDelete({
 			author: dto.author,
 			_id: dto.taskId,
 		})
 
-		if (!response) {
+		if (!task) {
 			throw new NotFoundException(`Task not found`)
 		}
 
-		return response
+		const { author, todo, ...res } = task.toJSON()
+
+		return res
 	}
 
 	async update(dto: UpdateTaskDto) {
 		const { author, taskId: _id, ...rest } = dto
 
-		const response = await this.taskModel
-			.findOneAndUpdate({ author, _id }, { ...rest }, { new: true })
-			.populate([
-				{
-					path: 'todo',
-					select: 'name',
-				},
-				{
-					path: 'author',
-					select: 'name',
-				},
-			])
+		const task = await this.taskModel.findOneAndUpdate(
+			{ author, _id },
+			{ ...rest },
+			{ new: true }
+		)
 
-		if (!response) {
+		if (!task) {
 			throw new NotFoundException(`Task not found`)
 		}
 
-		return response
+		const { author: dAuthor, todo: dTodo, ...res } = task.toJSON()
+
+		return res
 	}
 }
