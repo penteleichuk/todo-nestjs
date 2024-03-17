@@ -14,7 +14,7 @@ import { User } from './../user/decorators/user.decorator'
 import { MailActivationDto } from './dto/mail-activation.dto'
 import { MailActivationService } from './mail-activation.service'
 
-@ApiTags('user')
+@ApiTags('mail activation')
 @Controller('activation')
 export class MailActivationController {
 	constructor(private readonly mailActivationService: MailActivationService) {}

@@ -46,7 +46,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ForgotController.prototype, "forgotAccept", null);
 ForgotController = __decorate([
-    (0, swagger_1.ApiTags)('user'),
+    (0, swagger_1.ApiTags)('forgot password'),
     (0, common_1.Controller)('forgot'),
     __metadata("design:paramtypes", [forgot_service_1.ForgotService])
 ], ForgotController);
