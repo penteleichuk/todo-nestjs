@@ -40,7 +40,7 @@ export class MailActivationService {
 		)
 
 		if (!user) {
-			throw new BadRequestException('Invalid token')
+			throw new BadRequestException('Invalid user')
 		}
 
 		this.mailService.sendUserConfirmation(

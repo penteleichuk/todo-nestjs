@@ -7,7 +7,7 @@ import {
 	UsePipes,
 	ValidationPipe,
 } from '@nestjs/common'
-import { ApiBody, ApiTags } from '@nestjs/swagger'
+import { ApiBadRequestResponse, ApiBody, ApiTags } from '@nestjs/swagger'
 import { Types } from 'mongoose'
 import { Auth } from './../auth/decorators/auth.decorator'
 import { User } from './../user/decorators/user.decorator'
@@ -22,6 +22,7 @@ export class MailActivationController {
 	@Get('token')
 	@HttpCode(200)
 	@Auth()
+	@ApiBadRequestResponse({ description: 'Invalid user' })
 	async activationToken(@User('_id') _id: Types.ObjectId) {
 		return this.mailActivationService.activationToken(_id)
 	}
@@ -31,6 +32,7 @@ export class MailActivationController {
 	@HttpCode(200)
 	@Auth()
 	@ApiBody({ type: MailActivationDto })
+	@ApiBadRequestResponse({ description: 'Invalid token' })
 	async activationAccept(
 		@User('_id') author: Types.ObjectId,
 		@Body() dto: MailActivationDto
