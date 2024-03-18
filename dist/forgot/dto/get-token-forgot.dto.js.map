@@ -1,1 +1,0 @@
-{"version":3,"file":"get-token-forgot.dto.js","sourceRoot":"","sources":["../../../src/forgot/dto/get-token-forgot.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,6CAA6C;AAC7C,qDAAyC;AAEzC,MAAa,iBAAiB;CAO7B;AANA;IAAC,IAAA,yBAAO,GAAE;IACT,IAAA,qBAAW,EAAC;QACZ,WAAW,EAAE,oDAAoD;QACjE,OAAO,EAAE,kBAAkB;KAC3B,CAAC;;gDACoB;AANvB,8CAOC"}
