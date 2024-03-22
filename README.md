@@ -16,7 +16,7 @@ This project provides a straightforward and user-friendly API for developing Tod
   - create, delete, update, order
 
 > [!NOTE]
-> Swagger documentation is implemented for this project and can be accessed at `http://localhost:4221` when the server is running locally. Alternatively, you can view an example of the documentation by following the provided [link](https://web-production-2068.up.railway.app). Please ensure your local development environment is set up correctly and the server is running to access the Swagger UI at the specified local address.
+> Swagger documentation is implemented for this project and can be accessed at `http://localhost:4221` when the server is running locally. Alternatively, you can view an example of the documentation by following the provided [link](https://todo.vasyl.site/). Please ensure your local development environment is set up correctly and the server is running to access the Swagger UI at the specified local address.
 
 ### Installation
 
