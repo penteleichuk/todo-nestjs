@@ -6,6 +6,7 @@ import {
 import { ModelType } from '@typegoose/typegoose/lib/types'
 import { Types } from 'mongoose'
 import { InjectModel } from 'nestjs-typegoose'
+import { TaskModel } from './../task/task.model'
 import { CreateTodoDto } from './dto/create-todo.dto'
 import { DeleteTodoDto } from './dto/delete-todo.dto'
 import { GetByIdTodoDto } from './dto/get-byid-todo.dto'
@@ -16,8 +17,8 @@ import { TodoModel } from './todo.model'
 @Injectable()
 export class TodoService {
 	constructor(
-		@InjectModel(TodoModel)
-		private readonly todoModel: ModelType<TodoModel>
+		@InjectModel(TaskModel) private readonly taskModel: ModelType<TaskModel>,
+		@InjectModel(TodoModel) private readonly todoModel: ModelType<TodoModel>
 	) {}
 
 	async create(dto: CreateTodoDto) {
@@ -80,6 +81,10 @@ export class TodoService {
 			{ author: dto.author, order: { $gt: todoToDelete.order } },
 			{ $inc: { order: -1 } }
 		)
+
+		await this.taskModel.deleteMany({
+			todo: dto.todoId,
+		})
 
 		const { author, ...res } = todoToDelete.toJSON()
 		return res
