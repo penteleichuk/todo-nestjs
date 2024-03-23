@@ -13,7 +13,7 @@ async function bootstrap() {
 	app.use(requestIp.mw())
 
 	const config = new DocumentBuilder()
-		.setTitle('Todo documentation')
+		.setTitle('Documentation')
 		.setDescription('The todo API description')
 		.setVersion('1.0')
 		.addTag('Todo')
