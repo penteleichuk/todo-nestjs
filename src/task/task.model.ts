@@ -23,9 +23,9 @@ export class TaskModel extends TimeStamps {
 	@ApiProperty({
 		description: 'Status of the task',
 		enum: StatusType,
-		default: StatusType.PENDING,
+		default: StatusType.NOT_DONE,
 	})
-	@prop({ required: true, enum: StatusType, default: StatusType.PENDING })
+	@prop({ required: true, enum: StatusType, default: StatusType.NOT_DONE })
 	status: StatusType
 
 	@prop({ required: true, ref: () => UserModel })

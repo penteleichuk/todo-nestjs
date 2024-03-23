@@ -35,7 +35,7 @@ export class CreateTaskDto {
 	@ApiPropertyOptional({
 		description: 'The status of the todo',
 		enum: StatusType,
-		example: StatusType.PENDING,
+		example: StatusType.NOT_DONE,
 	})
 	status: StatusType
 

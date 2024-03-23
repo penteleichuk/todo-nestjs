@@ -32,7 +32,7 @@ export class UpdateTaskDto {
 	@ApiPropertyOptional({
 		description: 'The status of the task',
 		enum: StatusType,
-		example: StatusType.PENDING,
+		example: StatusType.NOT_DONE,
 	})
 	status: StatusType
 
