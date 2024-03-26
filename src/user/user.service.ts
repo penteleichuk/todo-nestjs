@@ -63,7 +63,7 @@ export class UserService {
 
 		return {
 			user: this.authServivce.returnUserFields(user),
-			tokens,
+			...tokens,
 		}
 	}
 
