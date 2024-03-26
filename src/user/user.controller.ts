@@ -11,6 +11,7 @@ import {
 import { ApiBody, ApiCreatedResponse, ApiTags } from '@nestjs/swagger'
 import { Types } from 'mongoose'
 import { Auth } from './../auth/decorators/auth.decorator'
+import { AuthResponseDto } from './../auth/dto/auth-response.dto'
 import { User } from './decorators/user.decorator'
 import { ChangePasswordDto } from './dto/change-password.dto'
 import { UpdateProfileDto } from './dto/update-profile.dto'
@@ -54,7 +55,7 @@ export class UserController {
 	@ApiBody({ type: ChangePasswordDto })
 	@ApiCreatedResponse({
 		description: 'Response change password user object as response.',
-		type: UserModel,
+		type: AuthResponseDto,
 	})
 	async changePassword(
 		@User('_id') _id: Types.ObjectId,

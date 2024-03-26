@@ -7,6 +7,7 @@ import { ModelType } from '@typegoose/typegoose/lib/types'
 import { compare, genSalt, hash } from 'bcryptjs'
 import { Types } from 'mongoose'
 import { InjectModel } from 'nestjs-typegoose'
+import { AuthService } from './../auth/auth.service'
 import { ChangePasswordDto } from './dto/change-password.dto'
 import { UpdateProfileDto } from './dto/update-profile.dto'
 import { UserModel } from './user.model'
@@ -14,7 +15,8 @@ import { UserModel } from './user.model'
 @Injectable()
 export class UserService {
 	constructor(
-		@InjectModel(UserModel) private readonly userModel: ModelType<UserModel>
+		@InjectModel(UserModel) private readonly userModel: ModelType<UserModel>,
+		private authServivce: AuthService
 	) {}
 
 	async getById(_id: Types.ObjectId) {
@@ -57,11 +59,11 @@ export class UserService {
 
 		await user.save()
 
+		const tokens = await this.authServivce.issueTokenPair(String(user._id))
+
 		return {
-			_id: user._id,
-			name: user.name,
-			email: user.email,
-			updatedAt: user.updatedAt,
+			user: this.authServivce.returnUserFields(user),
+			tokens,
 		}
 	}
 
