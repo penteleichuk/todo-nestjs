@@ -52,9 +52,9 @@ export class UserService {
 			throw new BadRequestException('Passwords do not match.')
 		}
 
-		if (dto.password) {
+		if (dto.newPassword) {
 			const salt = await genSalt(10)
-			user.password = await hash(dto.password, salt)
+			user.password = await hash(dto.newPassword, salt)
 		}
 
 		await user.save()
