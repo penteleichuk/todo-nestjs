@@ -43,12 +43,15 @@ export class EmailActivationService {
 			throw new BadRequestException('Invalid user')
 		}
 
-		const res = this.mailService.sendUserConfirmation(
-			{ email: user.email, name: user.name },
-			emailToken
-		)
-		console.log(res)
-		return res
+		try {
+			const res = this.mailService.sendUserConfirmation(
+				{ email: user.email, name: user.name },
+				emailToken
+			)
+			return res
+		} catch (error) {
+			throw new BadRequestException(error, 'Invalid email')
+		}
 	}
 
 	async activationAccept(dto: EmailActivationDto) {
