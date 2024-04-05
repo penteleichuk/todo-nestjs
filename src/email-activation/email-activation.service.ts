@@ -44,11 +44,11 @@ export class EmailActivationService {
 		}
 
 		try {
-			const res = await this.mailService.sendUserConfirmation(
+			this.mailService.sendUserConfirmation(
 				{ email: user.email, name: user.name },
 				emailToken
 			)
-			return res
+			return 'success'
 		} catch (error) {
 			throw new BadRequestException(error, 'Invalid email')
 		}
