@@ -44,7 +44,7 @@ export class EmailActivationService {
 		}
 
 		try {
-			const res = this.mailService.sendUserConfirmation(
+			const res = await this.mailService.sendUserConfirmation(
 				{ email: user.email, name: user.name },
 				emailToken
 			)
