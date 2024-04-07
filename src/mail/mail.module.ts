@@ -1,9 +1,9 @@
 import { MailerModule } from '@nestjs-modules/mailer'
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter'
 import { Global, Module } from '@nestjs/common'
-import { MailService } from './mail.service'
-import { join } from 'path'
 import { ConfigModule, ConfigService } from '@nestjs/config'
+import { join } from 'path'
+import { MailService } from './mail.service'
 
 @Global()
 @Module({
@@ -21,7 +21,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 					},
 				},
 				defaults: {
-					from: `"${config.get('APP_TITLE')} APP" <${config.get('MAIL_FROM')}>`,
+					from: `"${config.get('APP_TITLE')}" <${config.get('MAIL_FROM')}>`,
 				},
 				template: {
 					dir: join(__dirname, 'templates'),
