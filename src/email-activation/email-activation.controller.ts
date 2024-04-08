@@ -1,12 +1,4 @@
-import {
-	Body,
-	Controller,
-	Get,
-	HttpCode,
-	Put,
-	UsePipes,
-	ValidationPipe,
-} from '@nestjs/common'
+import { Body, Controller, Get, HttpCode, Put } from '@nestjs/common'
 import { ApiBadRequestResponse, ApiBody, ApiTags } from '@nestjs/swagger'
 import { Types } from 'mongoose'
 import { Auth } from './../auth/decorators/auth.decorator'
@@ -29,7 +21,6 @@ export class EmailActivationController {
 		return this.emailActivationService.activationToken(_id)
 	}
 
-	@UsePipes(new ValidationPipe())
 	@Put('accept-token')
 	@HttpCode(200)
 	@Auth()
