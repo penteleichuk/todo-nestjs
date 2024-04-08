@@ -26,7 +26,7 @@ jobs:
           port: 22
           script: |
             cd /var/www/todo
-            git pull origin master
+            git pull origin master -f
             git status
             yarn
             yarn build
