@@ -48,6 +48,8 @@ export class ForgotService {
 			{ email: user.email, name: user.name },
 			forgotToken
 		)
+
+		return { status: 'success' }
 	}
 
 	async forgotAccept({ forgotToken, password, email }: AcceptForgotDto) {
@@ -75,5 +77,7 @@ export class ForgotService {
 		if (!user) {
 			throw new BadRequestException('The token is incorrect.')
 		}
+
+		return { status: 'success' }
 	}
 }

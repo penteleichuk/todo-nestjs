@@ -1,13 +1,4 @@
-import {
-	Body,
-	Controller,
-	Get,
-	HttpCode,
-	Patch,
-	Post,
-	UsePipes,
-	ValidationPipe,
-} from '@nestjs/common'
+import { Body, Controller, Get, HttpCode, Patch, Post } from '@nestjs/common'
 import { ApiBody, ApiCreatedResponse, ApiTags } from '@nestjs/swagger'
 import { Types } from 'mongoose'
 import { Auth } from './../auth/decorators/auth.decorator'
@@ -49,7 +40,6 @@ export class UserController {
 	}
 
 	@Post('/change-password')
-	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
 	@Auth()
 	@ApiBody({ type: ChangePasswordDto })

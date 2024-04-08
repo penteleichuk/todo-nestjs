@@ -1,12 +1,4 @@
-import {
-	Body,
-	Controller,
-	HttpCode,
-	Post,
-	Put,
-	UsePipes,
-	ValidationPipe,
-} from '@nestjs/common'
+import { Body, Controller, HttpCode, Post, Put } from '@nestjs/common'
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { AuthService } from './auth.service'
 import { AuthResponseDto } from './dto/auth-response.dto'
@@ -19,7 +11,6 @@ import { RegistrationDto } from './dto/registration.dto'
 export class AuthController {
 	constructor(private readonly AuthService: AuthService) {}
 
-	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
 	@Post('login')
 	@ApiBody({ type: LoginDto })
@@ -32,7 +23,6 @@ export class AuthController {
 		return this.AuthService.login(dto)
 	}
 
-	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
 	@Put('access-token')
 	@ApiBody({ type: RefreshTokenDto })
@@ -45,7 +35,6 @@ export class AuthController {
 		return this.AuthService.getNewTokens(dto)
 	}
 
-	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
 	@Post('register')
 	@ApiBody({ type: RegistrationDto })

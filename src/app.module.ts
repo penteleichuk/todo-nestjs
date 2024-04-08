@@ -20,11 +20,11 @@ import { UserModule } from './user/user.module'
 		}),
 		AuthModule,
 		UserModule,
-		MailModule,
 		ForgotModule,
 		MailActivationModule,
 		TodoModule,
 		TaskModule,
+		MailModule,
 	],
 })
 export class AppModule {}
