@@ -1,10 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { modelOptions, prop, Ref } from '@typegoose/typegoose'
-import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses'
+import { TimeStamps } from '@typegoose/typegoose/lib/defaultClasses'
 import { Types } from 'mongoose'
 import { StatusType } from './..//shared/consts/task-status'
 import { TodoModel } from './../todo/todo.model'
 import { UserModel } from './../user/user.model'
+
+export interface Base {
+	_id: Types.ObjectId
+}
 
 export interface TaskModel extends Base {}
 
@@ -14,6 +18,7 @@ export class TaskModel extends TimeStamps {
 		example: '65f73d3ec53f4aa7e8939696',
 		description: 'Unique identifier for the Task',
 	})
+	@prop({ required: true })
 	_id: Types.ObjectId
 
 	@ApiProperty({ example: 'My work', description: 'Display task name' })

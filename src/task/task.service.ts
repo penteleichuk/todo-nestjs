@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { ModelType } from '@typegoose/typegoose/lib/types'
+import { Types } from 'mongoose'
 import { InjectModel } from 'nestjs-typegoose'
 import { TodoModel } from './../todo/todo.model'
 import { CreateTaskDto } from './dto/create-task.dto'
@@ -32,6 +33,8 @@ export class TaskService {
 			throw new NotFoundException('Todo not found')
 		}
 
+		const _id = dto._id || new Types.ObjectId()
+
 		const maxOrderTask = await this.taskModel
 			.findOne({ todo: dto.todoId, author: dto.author })
 			.sort({ order: -1 })
@@ -39,7 +42,7 @@ export class TaskService {
 
 		const order = maxOrderTask ? maxOrderTask.order + 1 : 1
 
-		const newTask = new this.taskModel({ ...dto, todo: dto.todoId, order })
+		const newTask = new this.taskModel({ ...dto, todo: dto.todoId, _id, order })
 		const { author, todo, ...res } = (await newTask.save()).toJSON()
 
 		return res

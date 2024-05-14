@@ -27,8 +27,10 @@ export class TodoService {
 			.sort({ order: -1 })
 			.exec()
 
+		const _id = dto._id || new Types.ObjectId()
+
 		const order = maxOrderTodo ? maxOrderTodo.order + 1 : 1
-		const newTodo = await new this.todoModel({ ...dto, order }).populate({
+		const newTodo = await new this.todoModel({ ...dto, _id, order }).populate({
 			path: 'tasks',
 			select: '-author',
 		})
