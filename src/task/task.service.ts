@@ -33,7 +33,10 @@ export class TaskService {
 			throw new NotFoundException('Todo not found')
 		}
 
-		const _id = dto._id || new Types.ObjectId()
+		const _id =
+			dto._id && Types.ObjectId.isValid(dto._id)
+				? new Types.ObjectId(dto._id)
+				: new Types.ObjectId()
 
 		const maxOrderTask = await this.taskModel
 			.findOne({ todo: dto.todoId, author: dto.author })
