@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
@@ -11,6 +12,12 @@ async function bootstrap() {
 	app.enableCors()
 	app.setGlobalPrefix('api')
 	app.use(requestIp.mw())
+
+	app.useGlobalPipes(
+		new ValidationPipe({
+			transform: true,
+		})
+	)
 
 	const config = new DocumentBuilder()
 		.setTitle('Documentation')
@@ -31,7 +38,7 @@ async function bootstrap() {
 	})
 
 	if (configService.get('NODE_ENV') === 'development') {
-		await app.listen(4221)
+		await app.listen(4222)
 	} else {
 		await app.listen(process.env.PORT || 3000, '0.0.0.0')
 	}
