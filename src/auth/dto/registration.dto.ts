@@ -1,8 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEmail, IsString, MaxLength, MinLength } from 'class-validator'
+import { ToLowerCase } from './../../shared/utilits/toLowerCase'
 
 export class RegistrationDto {
 	@IsEmail()
+	@ToLowerCase()
 	@ApiProperty({
 		description: 'User email address',
 		example: 'user@example.com',
