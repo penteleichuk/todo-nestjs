@@ -1,4 +1,3 @@
-import { ValidationPipe } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
@@ -13,11 +12,11 @@ async function bootstrap() {
 	app.setGlobalPrefix('api')
 	app.use(requestIp.mw())
 
-	app.useGlobalPipes(
-		new ValidationPipe({
-			transform: true,
-		})
-	)
+	// app.useGlobalPipes(
+	// 	new ValidationPipe({
+	// 		transform: true,
+	// 	})
+	// )
 
 	const config = new DocumentBuilder()
 		.setTitle('Documentation')

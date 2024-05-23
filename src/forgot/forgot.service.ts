@@ -27,7 +27,7 @@ export class ForgotService {
 
 		const user = await this.UserModel.findOneAndUpdate(
 			{
-				email: dto.email,
+				email: dto.email.toLowerCase(),
 				emailActivate: true,
 				tokenUpdatedAt: { $lte: currentDate },
 			},
@@ -61,7 +61,7 @@ export class ForgotService {
 
 		const user = await this.UserModel.findOneAndUpdate(
 			{
-				email: email,
+				email: email.toLowerCase(),
 				forgotToken: forgotToken,
 				emailActivate: true,
 			},

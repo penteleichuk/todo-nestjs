@@ -62,7 +62,9 @@ export class AuthService {
 	}
 
 	async register({ email, name, password: currentPassword }: RegistrationDto) {
-		const isExistEmail = await this.UserModel.findOne({ email })
+		const isExistEmail = await this.UserModel.findOne({
+			email: email.toLowerCase(),
+		})
 		if (isExistEmail) {
 			throw new BadRequestException(
 				'The email is either already registered or invalid.'
@@ -75,14 +77,17 @@ export class AuthService {
 
 		const newUser = new this.UserModel({
 			name,
-			email,
+			email: email.toLowerCase(),
 			password,
 			emailToken,
 		})
 
 		await newUser.save()
 
-		this.mailService.sendUserConfirmation({ email, name }, emailToken)
+		this.mailService.sendUserConfirmation(
+			{ email: email.toLowerCase(), name },
+			emailToken
+		)
 		const { refreshToken, accessToken } = await this.issueTokenPair(
 			String(newUser._id)
 		)
@@ -95,7 +100,10 @@ export class AuthService {
 	}
 
 	async validateUser({ email, password }: LoginDto): Promise<UserModel> {
-		const user = await this.UserModel.findOne({ email }, ignoredField)
+		const user = await this.UserModel.findOne(
+			{ email: email.toLowerCase() },
+			ignoredField
+		)
 
 		if (!user) {
 			throw new BadRequestException('User not found.')
