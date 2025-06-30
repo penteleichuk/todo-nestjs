@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypegooseModule } from 'nestjs-typegoose'
+import * as path from 'path'
 import { AuthModule } from './auth/auth.module'
 import { MailActivationModule } from './email-activation/email-activation.module'
 import { ForgotModule } from './forgot/forgot.module'
@@ -12,7 +13,16 @@ import { UserModule } from './user/user.module'
 
 @Module({
 	imports: [
-		ConfigModule.forRoot(),
+		ConfigModule.forRoot({
+			isGlobal: true,
+			envFilePath: [
+				path.resolve(
+					__dirname,
+					`../.env.${process.env.NODE_ENV || 'development'}`
+				),
+				path.resolve(__dirname, '../.env'),
+			],
+		}),
 		TypegooseModule.forRootAsync({
 			imports: [ConfigModule],
 			inject: [ConfigService],
