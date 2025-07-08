@@ -1,23 +1,15 @@
-# This is a basic workflow to help you get started with Actions
+name: Restart Docker container on push
 
-name: Node.js CD
-
-# Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [master]
+    branches: [main]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  redeploy:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Deploy using ssh
+      - name: Restart app container on remote host
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -25,9 +17,14 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            cd /var/www/todo
-            git pull origin master -f
-            git status
-            yarn
-            yarn build
-            pm2 restart todo
+            eval "$(ssh-agent -s)"
+            ssh-add ~/.ssh/id_rsa_docker
+            ssh-add -l
+            export DOCKER_BUILDKIT=1
+            cd /opt/vps-stack-compose
+            echo "🔨 Собираем образ..."
+            docker compose build --no-cache todo_nestjs
+            echo "🚀 Перезапускаем контейнер..."
+            docker compose up -d --force-recreate todo_nestjs
+            docker image prune -f
+            docker images --filter "dangling=true" --no-trunc
