@@ -2,7 +2,7 @@ name: Restart Docker container on push
 
 on:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   redeploy:
