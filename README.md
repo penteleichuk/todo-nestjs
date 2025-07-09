@@ -1,6 +1,6 @@
 ## About
 
-Simple and Convenient Todo Development API Using Next.js and MongoDB
+Simple and Convenient Todo Development API Using Next.js and MongoDB.
 
 This project provides a straightforward and user-friendly API for developing Todo applications. It is built on the [Next.js](https://nextjs.org/) framework, leveraging [MongoDB](https://www.mongodb.com/) as the database for efficient data storage and retrieval. This setup ensures a seamless development experience, allowing for quick integration and manipulation of todo items within your application.
 
